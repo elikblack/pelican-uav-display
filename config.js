@@ -9,6 +9,9 @@ window.DISPLAY_CONFIG = {
     greenDim: "#345f30",
     cyan: "#63d2d8",
     signalBlue: "#4fa7ff",
+    routeDone: "#315c58",
+    throughputYellow: "#f2d35e",
+    throughputOrange: "#ed8b2f",
     amber: "#d7aa35",
     red: "#d95750",
     text: "#b3caaa",
@@ -81,9 +84,15 @@ window.DISPLAY_CONFIG = {
   },
 
   animation: {
-    loopMs: 36000,
-    pauseAtEndMs: 2800,
-    waypointPulseMs: 650
+    aircraftTravelMs: 72000,
+    scanMs: 3200,
+    endPauseMs: 2600,
+    orbitRadius: 36,
+    aoiSize: 120
+  },
+
+  throughput: {
+    stepMs: 185
   },
 
   route: {
