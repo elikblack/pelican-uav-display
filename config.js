@@ -71,13 +71,13 @@ window.DISPLAY_CONFIG = {
   },
 
   map: {
-    image: "assets/terrain.svg",
-    worldWidth: 1700,
-    worldHeight: 1342,
+    image: "assets/terrain-desert.jpg",
+    worldWidth: 2400,
+    worldHeight: 1028,
     startX: -250,
-    startY: -100,
-    endX: -430,
-    endY: -225
+    startY: -60,
+    endX: -520,
+    endY: -124
   },
 
   animation: {
