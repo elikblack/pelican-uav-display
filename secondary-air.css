@@ -1,3 +1,5 @@
+@import url("secondary-tabs.css");
+
 .air-module .radar-module-body{
   grid-template-columns:minmax(0,1fr) 138px;
   gap:10px;
