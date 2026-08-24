@@ -8,6 +8,7 @@ window.DISPLAY_CONFIG = {
     green: "#77c95b",
     greenDim: "#345f30",
     cyan: "#63d2d8",
+    signalBlue: "#4fa7ff",
     routeDone: "#315c58",
     throughputYellow: "#f2d35e",
     throughputOrange: "#ed8b2f",
