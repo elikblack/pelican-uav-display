@@ -1,3 +1,6 @@
+/* Supersede the original coarse map grid so there is only one visible lattice to track. */
+.map-grid{display:none}
+
 .coord-grid-overlay{
   position:absolute;
   inset:2em;
