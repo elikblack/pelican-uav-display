@@ -8,7 +8,6 @@ window.DISPLAY_CONFIG = {
     green: "#77c95b",
     greenDim: "#345f30",
     cyan: "#63d2d8",
-    signalBlue: "#4fa7ff",
     routeDone: "#315c58",
     throughputYellow: "#f2d35e",
     throughputOrange: "#ed8b2f",
@@ -84,11 +83,13 @@ window.DISPLAY_CONFIG = {
   },
 
   animation: {
-    aircraftTravelMs: 72000,
-    scanMs: 3200,
-    endPauseMs: 2600,
+    // One physical speed now drives route travel, loiter orbit and rejoin curves.
+    // This makes the motion easy to tune without doing timing math by hand.
+    aircraftSpeedPxPerSec: 20,
     orbitRadius: 36,
-    aoiSize: 120
+    orbitTurns: 1,
+    endPauseMs: 2600,
+    aoiSize: 126
   },
 
   throughput: {
