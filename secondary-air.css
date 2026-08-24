@@ -244,7 +244,9 @@
   opacity:1;
 }
 
-/* Small, intentionally uneven operational readouts around the plot. */
+/* Primitive, accumulated instrument readouts clustered around the upper-left
+   edge of the radar. Deliberately uneven widths and spacing echo older
+   operational displays without turning the whole panel into a period piece. */
 .air-module::before,
 .air-module::after,
 .air-module .radar-module-body::before,
@@ -253,45 +255,53 @@
   position:absolute;
   z-index:7;
   box-sizing:border-box;
-  border:1.5px solid rgba(119,201,91,.72);
-  background:rgba(1,5,2,.88);
-  color:rgba(148,226,116,.92);
+  border:2px solid rgba(119,201,91,.88);
+  background:#020402;
+  color:rgba(151,232,116,.98);
   white-space:pre;
   pointer-events:none;
-  font:700 7.5px/1.18 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:.015em;
+  font:700 8px/.98 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:0;
+  text-shadow:0 0 3px rgba(119,201,91,.16);
 }
 
 .air-module::before{
-  content:"SYS 12\A DISP AIR\A REF 330";
-  top:49px;
+  content:"12      NW\A        072";
+  top:50px;
   left:20px;
-  width:58px;
-  padding:4px 5px 3px;
+  width:70px;
+  height:31px;
+  padding:4px 5px 2px;
 }
 
 .air-module::after{
-  content:"IFF  AUTO\A SRC  COMB";
+  content:"DISPLAY\A RADAR";
   top:50px;
-  right:166px;
-  width:62px;
-  padding:4px 5px;
+  left:95px;
+  width:64px;
+  height:31px;
+  padding:4px 5px 2px;
 }
 
 .air-module .radar-module-body::before{
-  content:"RNG 120\A AZ  067";
+  content:"MENU UP  M\A ANT 1  S-BAND";
   left:8px;
-  bottom:9px;
-  width:54px;
-  padding:3px 5px;
+  top:42px;
+  width:100px;
+  height:38px;
+  padding:4px 5px 3px;
+  background:
+    linear-gradient(to bottom,transparent 18px,rgba(119,201,91,.88) 18px,rgba(119,201,91,.88) 20px,transparent 20px),
+    #020402;
 }
 
 .air-module .radar-module-body::after{
-  content:"TRK 07\A AGE 01.2";
-  right:151px;
-  bottom:11px;
-  width:58px;
-  padding:3px 5px;
+  content:"PULSE  L\A PICTURE  2T";
+  left:8px;
+  top:84px;
+  width:79px;
+  height:36px;
+  padding:4px 5px 3px;
 }
 
 @keyframes airTrackMove{
