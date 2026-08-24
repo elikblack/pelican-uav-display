@@ -1,3 +1,9 @@
+@import url("secondary-tabs.css");
+
+/* The radar markup is replaced by secondary.js. Keep the legacy HTML version
+   out of sight until secondary-air.css arrives, avoiding a first-paint flash. */
+.air-module{visibility:hidden}
+
 .weather-sector-body{
   position:absolute;
   left:12px;
@@ -128,9 +134,7 @@
 }
 
 .wx-mode span,
-.wx-intensity span{
-  opacity:.62;
-}
+.wx-intensity span{opacity:.62}
 
 .wx-mode strong{
   color:var(--text);
