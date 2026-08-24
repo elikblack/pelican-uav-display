@@ -100,50 +100,76 @@
           </div>
         </article>
 
-        <article class="secondary-module radar-module weather-module">
+        <article class="secondary-module weather-module">
           <header class="module-heading">WEATHER RADAR</header>
-          <div class="radar-module-body weather-body">
-            <svg class="radar-scope weather-scope" viewBox="0 0 390 320" role="img" aria-label="Weather precipitation radar">
+          <div class="weather-sector-body">
+            <svg class="weather-sector" viewBox="0 0 620 330" role="img" aria-label="Forward looking airborne weather radar">
               <defs>
-                <radialGradient id="weatherSweep" cx="50%" cy="50%" r="50%">
-                  <stop offset="0" stop-color="#77c95b" stop-opacity=".14"/>
-                  <stop offset="1" stop-color="#77c95b" stop-opacity="0"/>
-                </radialGradient>
+                <linearGradient id="wxShade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#071008" stop-opacity=".15"/>
+                  <stop offset="1" stop-color="#020503" stop-opacity=".7"/>
+                </linearGradient>
               </defs>
-              <g class="radar-grid-svg">
-                <circle cx="195" cy="160" r="50"/>
-                <circle cx="195" cy="160" r="100"/>
-                <circle cx="195" cy="160" r="150"/>
-                <path d="M45 160H345M195 10V310"/>
+
+              <rect x="0" y="0" width="620" height="330" fill="url(#wxShade)"/>
+
+              <g class="wx-heading-scale">
+                <path d="M38 30H582"/>
+                <path d="M72 30v9M140 30v9M208 30v9M276 30v13M344 30v13M412 30v9M480 30v9M548 30v9"/>
+                <text x="72" y="22">30</text><text x="140" y="22">31</text><text x="208" y="22">32</text>
+                <text x="276" y="22">33</text><text x="344" y="22">34</text><text x="412" y="22">35</text>
+                <text x="480" y="22">36</text><text x="548" y="22">37</text>
+                <path class="wx-heading-bug" d="M310 17v23M301 17h18"/>
               </g>
-              <g class="weather-returns">
-                <path class="weather-cell green cell-a" d="M76 87c12-18 36-22 54-10 11 8 16 22 11 34-8 19-34 28-53 18-17-9-24-28-12-42z"/>
-                <path class="weather-cell green cell-b" d="M105 205c17-21 43-27 64-13 17 11 22 35 9 51-16 20-47 25-67 10-16-12-19-33-6-48z"/>
-                <path class="weather-cell green cell-c" d="M226 190c23-38 68-50 95-24 21 20 16 54-8 72-31 23-76 18-94-10-8-13-6-25 7-38z"/>
-                <path class="weather-cell amber cell-d" d="M252 196c16-22 43-25 60-8 14 14 9 35-9 47-22 15-50 9-59-10-5-10-2-19 8-29z"/>
-                <path class="weather-cell amber cell-e" d="M91 91c8-11 23-13 33-4 8 7 6 19-3 26-12 9-27 6-32-5-2-6-2-11 2-17z"/>
+
+              <g class="wx-sector-grid">
+                <path d="M310 312L42 62M310 312L578 62"/>
+                <path d="M310 312V42" class="wx-centerline"/>
+                <path d="M220 312A90 90 0 0 1 400 312"/>
+                <path d="M145 312A165 165 0 0 1 475 312"/>
+                <path d="M70 312A240 240 0 0 1 550 312"/>
+                <path d="M5 312A305 305 0 0 1 615 312"/>
               </g>
-              <g class="radar-sweep weather-sweep">
-                <path d="M195 160 L319 76 A150 150 0 0 1 345 160 Z" fill="url(#weatherSweep)"/>
-                <path d="M195 160L345 160" class="sweep-edge"/>
+
+              <g class="wx-range-labels">
+                <text x="320" y="226">10</text>
+                <text x="320" y="151">20</text>
+                <text x="320" y="77">30</text>
+                <text x="584" y="68">40 NM</text>
               </g>
-              <g class="cardinals">
-                <text x="195" y="18">N</text><text x="195" y="314">S</text>
-                <text x="48" y="165">W</text><text x="342" y="165">E</text>
+
+              <g class="weather-returns-sector wx-left">
+                <path class="wx-green" d="M28 76h32V62h40v10h36v19h30v18h35v24h-26v22h-42v-12H96v17H63v-24H38v-27H18z"/>
+                <path class="wx-yellow" d="M55 83h34V71h31v14h26v19h31v20h-22v18h-35v-14H88v12H58v-22H40V96h15z"/>
+                <path class="wx-red" d="M76 89h28V79h20v14h25v18h18v15h-28v11h-26v-13H88v8H67v-21H55V98h21z"/>
+                <path class="wx-magenta" d="M94 93h19v-8h13v12h17v17h-12v12h-17v-10H99v7H83v-17H76V98h18z"/>
               </g>
-              <circle cx="195" cy="160" r="5" class="radar-origin"/>
+
+              <g class="weather-returns-sector wx-mid">
+                <path class="wx-green" d="M172 170h33v-20h38v12h34v25h28v24h-18v22h-40v-13h-35v18h-37v-20h-28v-24h25z"/>
+                <path class="wx-yellow" d="M191 177h29v-15h25v12h27v21h21v17h-20v17h-31v-12h-27v10h-26v-18h-20v-18h22z"/>
+                <path class="wx-red" d="M211 182h20v-11h18v13h19v17h15v11h-17v13h-21v-10h-19v8h-20v-15h-13v-14h18z"/>
+              </g>
+
+              <g class="weather-returns-sector wx-right">
+                <path class="wx-green" d="M360 91h38V72h42v13h37v19h33v22h37v31h34v40h-22v28h-43v-16h-36v22h-42v-18h-31v-26h-38v-29h-29v-30h20z"/>
+                <path class="wx-yellow" d="M390 101h29V85h35v13h31v18h29v20h31v28h25v27h-24v22h-34v-15h-30v20h-34v-18h-26v-22h-28v-25h-24v-26h20z"/>
+                <path class="wx-red" d="M421 111h25V98h24v15h23v17h27v22h21v22h-20v18h-28v-14h-23v15h-26v-17h-19v-20h-23v-21h-18v-20h17z"/>
+                <path class="wx-magenta" d="M451 119h17v-10h15v13h17v16h18v16h14v15h-16v13h-19v-12h-18v10h-20v-14h-14v-17h-13v-16h19z"/>
+              </g>
+
+              <g class="wx-ownship" transform="translate(310 294)">
+                <path d="M0 -28L5 -8L25 3L25 9L5 4L4 23L12 29L12 33L0 29L-12 33L-12 29L-4 23L-5 4L-25 9L-25 3L-5 -8Z"/>
+                <path d="M-34 0H34M0 -42V38" class="wx-ownship-cross"/>
+              </g>
             </svg>
 
-            <div class="radar-side-data weather-data">
-              <div><span>MODE</span><strong>PRECIP</strong></div>
-              <div><span>RANGE</span><strong>160 NM</strong></div>
-              <div><span>INTENSITY</span><i class="intensity-scale"><b></b><b></b><b></b><b class="warn"></b><b class="warn"></b><b></b></i></div>
-              <div><span>CONDITIONS</span><strong>LIGHT–MOD</strong></div>
-              <div><span>WIND</span><strong>220° / 18 KT</strong></div>
-              <div class="scan-line"><span>SCAN</span><strong>8.0 NM</strong></div>
+            <div class="weather-legend-greeble" aria-label="Weather radar legend">
+              <div class="wx-mode"><span>WX</span><strong>MAN</strong><span>TILT</span><strong>+0.5°</strong><span>RNG</span><strong>40 NM</strong></div>
+              <div class="wx-intensity"><span>PRECIP</span><i class="wx-swatch green"></i><i class="wx-swatch yellow"></i><i class="wx-swatch red"></i><i class="wx-swatch magenta"></i></div>
             </div>
           </div>
-          <footer class="weather-alert"><span class="alert-icon">△</span><div><span>WEATHER ALERT</span><strong>MODERATE PRECIPITATION · SOUTH / SOUTHEAST</strong></div><div class="alert-range"><span>RANGE</span><strong>40–90 NM</strong></div></footer>
+          <footer class="weather-alert"><span class="alert-icon">△</span><div><span>WEATHER ALERT</span><strong>MODERATE / HEAVY PRECIPITATION · FORWARD SECTOR</strong></div><div class="alert-range"><span>RANGE</span><strong>20–40 NM</strong></div></footer>
         </article>
       </section>
     </main>
