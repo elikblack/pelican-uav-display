@@ -136,9 +136,9 @@
       gradient.setAttribute("x2", "100%");
       gradient.setAttribute("y2", "0%");
       const stops = [
-        ["0%", "var(--throughput-orange)"],
+        ["0%", cfg.theme.throughputOrange ?? "#ed8b2f"],
         ["58%", "#f0ad39"],
-        ["100%", "var(--throughput-yellow)"]
+        ["100%", cfg.theme.throughputYellow ?? "#f2d35e"]
       ];
       stops.forEach(([offset, color]) => {
         const stop = document.createElementNS("http://www.w3.org/2000/svg", "stop");
