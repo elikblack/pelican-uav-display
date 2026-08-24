@@ -1,0 +1,190 @@
+.air-module .radar-module-body{
+  grid-template-columns:minmax(0,1fr) 138px;
+  gap:10px;
+}
+
+.airspace-plot{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(86,112,132,.025),rgba(86,112,132,.008)),
+    #020402;
+}
+
+.air-geo-line,
+.air-geo-zone,
+.air-geo-circle,
+.air-geo-dash,
+.air-waypoint{
+  fill:none;
+  vector-effect:non-scaling-stroke;
+}
+
+.air-geo-line{
+  stroke:rgba(126,153,176,.28);
+  stroke-width:1.05;
+}
+
+.air-geo-line.strong{
+  stroke:rgba(141,168,191,.42);
+  stroke-width:1.15;
+}
+
+.air-geo-zone{
+  stroke:rgba(126,153,178,.31);
+  stroke-width:1.15;
+}
+
+.air-geo-dash{
+  stroke:rgba(126,153,178,.25);
+  stroke-width:1;
+  stroke-dasharray:7 7;
+}
+
+.air-geo-circle{
+  stroke:rgba(134,161,185,.3);
+  stroke-width:1;
+}
+
+.air-waypoint{
+  stroke:rgba(145,170,192,.38);
+  stroke-width:1;
+}
+
+.air-geo-label{
+  fill:rgba(151,177,199,.5);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.05em;
+}
+
+.air-zone-label{
+  fill:rgba(151,177,199,.38);
+  font-size:8px;
+  letter-spacing:.07em;
+}
+
+.air-contact-wrap{
+  color:var(--green);
+}
+
+.air-contact{
+  fill:none;
+  stroke:var(--green);
+  stroke-width:1.2;
+  vector-effect:non-scaling-stroke;
+  animation:airContactLive 6.4s steps(1,end) infinite;
+}
+
+.air-contact .air-symbol{
+  fill:#020402;
+  stroke:currentColor;
+}
+
+.air-contact .air-dot{
+  fill:currentColor;
+  stroke:none;
+}
+
+.air-contact .air-track{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1;
+  opacity:.72;
+}
+
+.air-contact .air-readout{
+  fill:currentColor;
+  stroke:none;
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.035em;
+}
+
+.air-contact .air-readout.dim{
+  opacity:.72;
+  font-size:8px;
+}
+
+.air-contact.tracked{
+  color:#a6ec7d;
+}
+
+.air-contact.tracked .track-box{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1;
+  stroke-dasharray:3 2;
+  opacity:.82;
+}
+
+.air-contact.coast{
+  opacity:.62;
+}
+
+.air-contact.contact-b{animation-delay:-2.1s}
+.air-contact.contact-c{animation-delay:-4.8s}
+.air-contact.contact-d{animation-delay:-1.2s}
+.air-contact.contact-e{animation-delay:-3.5s}
+.air-contact.contact-f{animation-delay:-5.6s}
+.air-contact.contact-g{animation-delay:-.4s}
+
+.air-contact-wrap.drift-a{animation:airDriftA 13s ease-in-out infinite alternate}
+.air-contact-wrap.drift-b{animation:airDriftB 16s ease-in-out infinite alternate}
+
+.air-module .radar-side-data{
+  height:88%;
+  padding-left:10px;
+}
+
+.air-module .radar-side-data>div{
+  min-height:43px;
+  justify-content:center;
+}
+
+.air-module .radar-side-data strong{
+  font-size:11px;
+}
+
+.air-module .radar-side-data .air-alert strong{
+  color:var(--amber);
+}
+
+.air-module .radar-legend{
+  gap:22px;
+}
+
+.air-module .radar-legend .friendly,
+.air-module .radar-legend .neutral,
+.air-module .radar-legend .unknown{
+  color:var(--green);
+  opacity:.76;
+}
+
+.air-module .radar-legend .tracked-key{
+  color:#a6ec7d;
+  opacity:1;
+}
+
+@keyframes airContactLive{
+  0%,86%,100%{opacity:.9}
+  88%{opacity:.36}
+  91%{opacity:1}
+  94%{opacity:.68}
+}
+
+@keyframes airDriftA{
+  from{transform:translate(0,0)}
+  to{transform:translate(2px,-1px)}
+}
+
+@keyframes airDriftB{
+  from{transform:translate(0,0)}
+  to{transform:translate(-1px,2px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .air-contact,
+  .air-contact-wrap{animation:none}
+}
