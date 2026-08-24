@@ -22,14 +22,14 @@
 }
 .coord-grid-svg{position:absolute;inset:0;overflow:visible}
 .coord-grid-line{
-  stroke:rgba(188,202,180,.75);
+  stroke:rgba(188,202,180,.35);
   stroke-width:1;
   vector-effect:non-scaling-stroke;
   shape-rendering:crispEdges;
 }
-.coord-grid-line.major{stroke:rgba(188,202,180,.34)}
+.coord-grid-line.major{stroke:rgba(188,202,180,.5)}
 .coord-grid-ref{
-  fill:rgba(216,225,208,.58);
+  fill:rgba(216,225,208,.75);
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
   font-size:9px;
   font-weight:500;
