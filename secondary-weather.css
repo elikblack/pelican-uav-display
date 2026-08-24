@@ -1,0 +1,157 @@
+.weather-sector-body{
+  position:absolute;
+  left:12px;
+  right:12px;
+  top:41px;
+  bottom:70px;
+  overflow:hidden;
+  background:rgba(1,5,2,.34);
+}
+
+.weather-sector-body:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(119,201,91,.018) 0 1px,transparent 1px 4px);
+  opacity:.75;
+}
+
+.weather-sector{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+.wx-heading-scale path,
+.wx-sector-grid path{
+  fill:none;
+  stroke:rgba(119,201,91,.28);
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+
+.wx-heading-scale text{
+  fill:var(--text);
+  opacity:.8;
+  font-size:11px;
+  font-weight:500;
+  text-anchor:middle;
+  letter-spacing:.03em;
+}
+
+.wx-heading-scale .wx-heading-bug{
+  stroke:var(--amber);
+  stroke-width:1.5;
+  opacity:.95;
+}
+
+.wx-sector-grid path{
+  stroke-dasharray:4 6;
+  opacity:.78;
+}
+
+.wx-sector-grid .wx-centerline{
+  stroke:var(--green);
+  stroke-dasharray:7 7;
+  opacity:.48;
+}
+
+.wx-range-labels text{
+  fill:var(--green);
+  opacity:.68;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.04em;
+}
+
+.weather-returns-sector{
+  animation:wxReturnFlicker 4.8s ease-in-out infinite;
+}
+.weather-returns-sector.wx-mid{animation-delay:-1.7s}
+.weather-returns-sector.wx-right{animation-delay:-3.1s}
+
+.weather-returns-sector path{
+  stroke:none;
+  shape-rendering:crispEdges;
+}
+
+.wx-green{fill:#45c96a;opacity:.86}
+.wx-yellow{fill:#d4c94b;opacity:.92}
+.wx-red{fill:#d95750;opacity:.96}
+.wx-magenta{fill:#cf62b8;opacity:.96}
+
+.wx-ownship>path:first-child{
+  fill:#071109;
+  stroke:var(--green);
+  stroke-width:1.6;
+  vector-effect:non-scaling-stroke;
+}
+
+.wx-ownship-cross{
+  fill:none;
+  stroke:var(--green);
+  stroke-width:1;
+  opacity:.62;
+  vector-effect:non-scaling-stroke;
+}
+
+.weather-legend-greeble{
+  position:absolute;
+  left:10px;
+  bottom:8px;
+  z-index:3;
+  min-width:270px;
+  padding:6px 8px 5px;
+  border:1px solid var(--line-soft);
+  background:rgba(1,5,2,.74);
+  color:var(--green);
+  font-size:9px;
+  letter-spacing:.055em;
+}
+
+.wx-mode,
+.wx-intensity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:15px;
+}
+
+.wx-mode span,
+.wx-intensity span{
+  opacity:.62;
+}
+
+.wx-mode strong{
+  color:var(--text);
+  font-size:9px;
+  font-weight:500;
+  margin-right:8px;
+}
+
+.wx-intensity{
+  margin-top:3px;
+  padding-top:4px;
+  border-top:1px solid var(--line-soft);
+}
+
+.wx-swatch{
+  display:block;
+  width:18px;
+  height:7px;
+  border:1px solid rgba(255,255,255,.08);
+}
+.wx-swatch.green{background:#45c96a}
+.wx-swatch.yellow{background:#d4c94b}
+.wx-swatch.red{background:#d95750}
+.wx-swatch.magenta{background:#cf62b8}
+
+@keyframes wxReturnFlicker{
+  0%,100%{opacity:.78}
+  32%{opacity:.94}
+  61%{opacity:.84}
+  78%{opacity:1}
+}
