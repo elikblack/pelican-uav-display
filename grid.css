@@ -22,7 +22,7 @@
 }
 .coord-grid-svg{position:absolute;inset:0;overflow:visible}
 .coord-grid-line{
-  stroke:rgba(188,202,180,.28);
+  stroke:rgba(188,202,180,.75);
   stroke-width:1;
   vector-effect:non-scaling-stroke;
   shape-rendering:crispEdges;
