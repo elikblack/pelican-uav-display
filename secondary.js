@@ -9,6 +9,28 @@
     display.style.transform = `translate(-50%, -50%) scale(${scale})`;
   }
 
+  function curveWeatherHeadingScale() {
+    const scale = document.querySelector('.wx-heading-scale');
+    if (!scale) return;
+
+    scale.innerHTML = `
+      <path d="M54 55 Q310 1 566 55" />
+
+      <path d="M77 48l-2 11M143 34l-1 11M209 24v11M276 18v15M344 18v15M411 24v11M477 34l1 11M543 48l2 11" />
+
+      <text x="77" y="40">30</text>
+      <text x="143" y="26">31</text>
+      <text x="209" y="16">32</text>
+      <text x="276" y="10">33</text>
+      <text x="344" y="10">34</text>
+      <text x="411" y="16">35</text>
+      <text x="477" y="26">36</text>
+      <text x="543" y="40">37</text>
+
+      <path class="wx-heading-bug" d="M310 4v30M301 12h18" />
+    `;
+  }
+
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(item => item.classList.remove('active'));
@@ -100,6 +122,7 @@
     fields.uptime.textContent = formatUptime(uptimeSeconds);
   }
 
+  curveWeatherHeadingScale();
   fitDisplay();
   updateTelemetry();
   tickUptime();
