@@ -77,6 +77,14 @@
   animation:airContactLive 6.4s steps(1,end) infinite;
 }
 
+.air-contact-wrap.drift-a .air-contact{
+  animation:airContactLive 6.4s steps(1,end) infinite,airDriftA 13s ease-in-out infinite alternate;
+}
+
+.air-contact-wrap.drift-b .air-contact{
+  animation:airContactLive 6.4s steps(1,end) infinite,airDriftB 16s ease-in-out infinite alternate;
+}
+
 .air-contact .air-symbol{
   fill:#020402;
   stroke:currentColor;
@@ -130,9 +138,6 @@
 .air-contact.contact-f{animation-delay:-5.6s}
 .air-contact.contact-g{animation-delay:-.4s}
 
-.air-contact-wrap.drift-a{animation:airDriftA 13s ease-in-out infinite alternate}
-.air-contact-wrap.drift-b{animation:airDriftB 16s ease-in-out infinite alternate}
-
 .air-module .radar-side-data{
   height:88%;
   padding-left:10px;
@@ -185,6 +190,5 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  .air-contact,
-  .air-contact-wrap{animation:none}
+  .air-contact{animation:none}
 }
