@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1342" viewBox="0 0 1700 1342">
+  <defs>
+    <filter id="terrain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0045 0.0065" numOctaves="6" seed="27" result="coarse"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.025 0.018" numOctaves="3" seed="71" result="fine"/>
+      <feBlend in="coarse" in2="fine" mode="multiply" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="
+        .54 .22 .05 0 .12
+        .42 .32 .07 0 .10
+        .18 .18 .10 0 .07
+        0 0 0 1 0" result="earth"/>
+      <feDiffuseLighting in="noise" surfaceScale="7" diffuseConstant="1.15" lighting-color="#d8c9a2" result="light">
+        <feDistantLight azimuth="315" elevation="34"/>
+      </feDiffuseLighting>
+      <feBlend in="earth" in2="light" mode="multiply" result="shaded"/>
+      <feComponentTransfer in="shaded">
+        <feFuncR type="gamma" amplitude="1.2" exponent=".82" offset=".02"/>
+        <feFuncG type="gamma" amplitude="1.05" exponent=".92" offset=".01"/>
+        <feFuncB type="gamma" amplitude=".76" exponent="1.05" offset="0"/>
+      </feComponentTransfer>
+    </filter>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b6a47d" stop-opacity=".08"/>
+      <stop offset=".5" stop-color="#e4d5a9" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#8e8060" stop-opacity=".08"/>
+    </linearGradient>
+    <radialGradient id="basin">
+      <stop offset="0" stop-color="#d3c39d" stop-opacity=".18"/>
+      <stop offset=".62" stop-color="#988a69" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#2f3426" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1700" height="1342" fill="#4c4938"/>
+  <rect width="1700" height="1342" filter="url(#terrain)" opacity=".92"/>
+
+  <ellipse cx="480" cy="395" rx="390" ry="280" fill="url(#basin)"/>
+  <ellipse cx="1325" cy="720" rx="430" ry="370" fill="url(#basin)" opacity=".55"/>
+
+  <g fill="none" stroke="url(#wash)" stroke-linecap="round">
+    <path d="M-90 980 C180 850 310 870 510 760 S840 690 1010 530 S1290 390 1780 210" stroke-width="38"/>
+    <path d="M40 1120 C250 1030 360 940 515 900 S790 830 970 700 S1240 640 1580 520" stroke-width="20"/>
+    <path d="M165 40 C250 210 345 310 485 375 S725 430 865 575 S1060 765 1240 900 S1480 1110 1710 1220" stroke-width="15"/>
+    <path d="M680 -40 C745 130 760 250 850 345 S1040 470 1110 600 S1190 830 1370 980" stroke-width="11"/>
+  </g>
+
+  <g fill="none" stroke="#d7c89d" stroke-opacity=".14" stroke-width="3">
+    <path d="M10 1080 C140 1030 180 930 320 900 S540 865 660 790 S850 710 950 600"/>
+    <path d="M100 1160 C260 1110 340 1020 470 1000 S740 955 880 845 S1130 690 1260 690"/>
+    <path d="M1040 0 C1010 170 1070 255 1160 350 S1310 475 1375 590 S1445 815 1600 910"/>
+    <path d="M1130 50 C1170 210 1260 275 1330 370 S1430 560 1510 650"/>
+  </g>
+
+  <g fill="none" stroke="#1d2118" stroke-opacity=".22" stroke-width="5">
+    <path d="M250 -40 C350 140 490 200 620 260 S850 330 930 450"/>
+    <path d="M110 300 C270 330 370 410 450 530 S540 740 660 860"/>
+    <path d="M1180 270 C1090 370 1060 500 1090 650 S1200 890 1180 1130"/>
+  </g>
+</svg>
