@@ -60,26 +60,12 @@
   stroke-width:1.35;
   stroke-linecap:round;
   stroke-linejoin:round;
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 4px,#000 4.6px);
+  mask:radial-gradient(circle at 50% 50%,transparent 0 4px,#000 4.6px);
 }
 
-/* The source SVG's filled path paints over its circle, so make the center
-   knockout a top-layer UI element instead. */
 .settings-tab::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:4;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#010201;
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-
-.settings-tab.active::before{
-  background:var(--green);
+  content:none;
 }
 
 .secondary-tab[data-tab="maintenance"]{
@@ -115,8 +101,6 @@
   background:rgba(255,215,90,.55);
 }
 
-/* secondary-air.css still carries the original badge rule later in the cascade.
-   Scope these overrides to the tab bar so the intended compact left-center badge wins. */
 .secondary-tabs .secondary-tab[data-tab="maintenance"]::before{
   left:16px;
   right:auto;
