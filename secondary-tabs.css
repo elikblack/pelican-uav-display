@@ -33,44 +33,40 @@
   transform:translateY(0);
 }
 
-.secondary-tab.active::after{
-  content:none;
-}
+.secondary-tab.active::after{content:none}
 
 .secondary-tab:not(.active):hover{
   opacity:.9;
   background:rgba(119,201,91,.72);
 }
 
-.secondary-tab:not(.active):hover::after{
-  background:#031005;
-}
+.secondary-tab:not(.active):hover::after{background:#031005}
 
 .settings-tab{
-  display:grid;
-  place-items:center;
+  display:block;
   padding:0;
 }
 
 .settings-tab svg{
-  width:27px;
-  height:27px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:24px;
+  height:24px;
+  margin:0;
   fill:currentColor;
   stroke:currentColor;
   stroke-width:1.35;
   stroke-linecap:round;
   stroke-linejoin:round;
-  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 4px,#000 4.6px);
-  mask:radial-gradient(circle at 50% 50%,transparent 0 4px,#000 4.6px);
+  transform:translate(-50%,-50%);
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 3.7px,#000 4.4px);
+  mask:radial-gradient(circle at 50% 50%,transparent 0 3.7px,#000 4.4px);
 }
 
-.settings-tab::before{
-  content:none;
-}
+.settings-tab::before{content:none}
 
-.secondary-tab[data-tab="maintenance"]{
-  padding-left:48px;
-}
+.secondary-tab[data-tab="maintenance"]{padding-left:48px}
 
 .secondary-tab[data-tab="maintenance"]::before{
   content:"1";
@@ -78,7 +74,6 @@
   place-items:center;
   position:absolute;
   left:16px;
-  right:auto;
   top:50%;
   z-index:3;
   width:18px;
@@ -96,23 +91,6 @@
 }
 
 .secondary-tab[data-tab="maintenance"].active::before{
-  color:#5b3f00;
-  border-color:#5b3f00;
-  background:rgba(255,215,90,.55);
-}
-
-.secondary-tabs .secondary-tab[data-tab="maintenance"]::before{
-  left:16px;
-  right:auto;
-  top:50%;
-  width:18px;
-  min-width:18px;
-  height:16px;
-  padding:0;
-  transform:translateY(-50%);
-}
-
-.secondary-tabs .secondary-tab[data-tab="maintenance"].active::before{
   color:#5b3f00;
   border-color:#5b3f00;
   background:rgba(255,215,90,.55);
