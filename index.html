@@ -11,49 +11,54 @@
     <main id="primary-display" class="display display-primary" aria-label="Mission planning display">
       <header class="topbar">
         <div class="brand-block">
-          <div class="brand-title" data-bind="labels.title">MISSION SYSTEM</div>
-          <div class="brand-subtitle">GROUND CONTROL / PLANNING</div>
+          <div class="brand-title" data-bind="labels.title">GROUND CONTROL</div>
+          <div class="brand-subtitle" data-bind="labels.subtitle">MISSION PLANNING</div>
         </div>
-        <div class="status-ribbon">
-          <div class="status-chip good" data-bind="labels.system">SYSTEM READY</div>
-          <div class="status-chip good" data-bind="labels.link">LINK GOOD</div>
-          <div class="status-chip good" data-bind="labels.gps">GPS LOCK</div>
-          <div class="status-chip amber" data-bind="labels.mode">MISSION SETUP</div>
-          <div class="status-chip" data-bind="labels.area">AREA ALPHA</div>
+
+        <div class="status-ribbon" aria-label="System status">
+          <div class="ribbon-cell"><span>SYSTEM</span><strong data-bind="labels.system">READY</strong></div>
+          <div class="ribbon-cell"><span>DATALINK</span><strong data-bind="labels.link">GOOD</strong></div>
+          <div class="ribbon-cell"><span>GPS</span><strong data-bind="labels.gps">LOCK</strong></div>
+          <div class="ribbon-cell"><span>MISSION</span><strong data-bind="labels.mode">SETUP</strong></div>
+          <div class="ribbon-cell"><span>AREA</span><strong data-bind="labels.area">ALPHA</strong></div>
         </div>
-        <div class="clock-block">
-          <div id="clock">--:--:--</div>
-          <div>LOCAL</div>
+
+        <div class="operator-block">
+          <span class="operator-glyph" aria-hidden="true"></span>
+          <span data-bind="labels.operator">OPERATOR 01</span>
+          <span class="chevron">⌄</span>
         </div>
+        <div class="menu-glyph" aria-label="Menu"><i></i><i></i><i></i></div>
       </header>
 
       <section class="workspace">
         <aside class="rail left-rail">
-          <section class="panel" id="platform-panel">
-            <div class="panel-heading" data-panel-title="platform">PLATFORM STATUS</div>
-            <div class="generic-airframe" aria-label="Generic fixed-wing platform outline">
-              <svg viewBox="0 0 280 90" role="img">
-                <path d="M140 8 L153 34 L260 43 L260 49 L158 53 L151 82 L129 82 L122 53 L20 49 L20 43 L127 34 Z" />
-              </svg>
-            </div>
+          <section class="panel platform-panel">
+            <div class="panel-heading"><span data-panel-title="platform">PLATFORM STATUS</span><b>•••</b></div>
             <div class="status-table" data-panel-rows="platform"></div>
           </section>
 
           <section class="panel mission-panel">
-            <div class="panel-heading">MISSION PLAN</div>
-            <div class="mission-summary">
-              <span>ROUTE PREVIEW</span>
-              <span id="route-progress">00%</span>
+            <div class="panel-heading"><span>MISSION PLAN</span><b>•••</b></div>
+            <div class="mission-body">
+              <div class="mission-meta">
+                <div><span>PLAN</span><strong data-bind="mission.plan">ALPHA_01</strong></div>
+                <div><span>TYPE</span><strong data-bind="mission.type">RECONNAISSANCE</strong></div>
+                <div><span>LAUNCH</span><strong data-bind="mission.launch">MANUAL</strong></div>
+                <div><span>START POINT</span><strong data-bind="mission.start">STAGING AREA</strong></div>
+                <div><span>EST. DURATION</span><strong data-bind="mission.duration">--:--</strong></div>
+                <div class="mission-state" data-bind="mission.state">NOT STARTED</div>
+              </div>
+              <div class="waypoint-column">
+                <div id="waypoint-list" class="waypoint-list" aria-live="polite"></div>
+                <div class="aoi-item"><span class="aoi-symbol"></span><b>AOI</b><em>SURVEY AREA</em></div>
+              </div>
             </div>
-            <div id="waypoint-list" class="waypoint-list" aria-live="polite"></div>
+            <div class="review-row"><span>REVIEW PLAN</span><b>›</b></div>
           </section>
         </aside>
 
         <section class="map-panel" aria-label="Fictional satellite mission map">
-          <div class="map-caption">
-            <span>MISSION AREA / SATELLITE</span>
-            <span class="map-mode">PLAN</span>
-          </div>
           <div id="map-viewport" class="map-viewport">
             <div id="map-world" class="map-world">
               <img id="terrain-image" alt="Fictional unpopulated arid satellite terrain">
@@ -63,59 +68,45 @@
                 <path id="route-progress-path" class="route route-progress-path"></path>
                 <g id="waypoint-layer"></g>
                 <g id="aircraft" class="aircraft">
-                  <path d="M0 -15 L5 -4 L24 1 L24 5 L6 6 L4 17 L-4 17 L-6 6 L-24 5 L-24 1 L-5 -4 Z"></path>
+                  <path d="M0 -14 L5 -4 L23 1 L23 5 L6 6 L4 16 L-4 16 L-6 6 L-23 5 L-23 1 L-5 -4 Z"></path>
                 </g>
               </svg>
             </div>
           </div>
-          <div class="map-scale"><span></span><b>10 KM</b></div>
+          <div class="map-overlay top-left"><span>SAT</span><b>PLAN</b></div>
+          <div class="route-progress-readout"><span>ROUTE PREVIEW</span><b id="route-progress">00%</b></div>
         </section>
 
         <aside class="rail right-rail">
-          <section class="panel">
-            <div class="panel-heading" data-panel-title="sensors">SENSORS</div>
+          <section class="panel sensors-panel">
+            <div class="panel-heading"><span data-panel-title="sensors">SENSORS</span><b>•••</b></div>
             <div class="status-table" data-panel-rows="sensors"></div>
           </section>
 
-          <section class="panel">
-            <div class="panel-heading" data-panel-title="payload">PAYLOAD</div>
+          <section class="panel payload-panel">
+            <div class="panel-heading"><span data-panel-title="payload">PAYLOAD</span><b>•••</b></div>
             <div class="status-table" data-panel-rows="payload"></div>
-            <div class="meter-block">
-              <div><span>READINESS</span><b>92%</b></div>
-              <div class="meter"><i style="width:92%"></i></div>
-            </div>
           </section>
 
           <section class="panel datalink-panel">
-            <div class="panel-heading" data-panel-title="datalink">DATALINK</div>
-            <div class="status-table" data-panel-rows="datalink"></div>
-            <div id="datalink-spark" class="sparkline" aria-label="Datalink activity"></div>
+            <div class="panel-heading"><span>DATALINK / TELEMETRY</span><b>•••</b></div>
+            <div class="telemetry-line"><span>LINK QUALITY</span><i class="quality-bar"></i><strong>GOOD</strong></div>
+            <div class="telemetry-line throughput"><span>THROUGHPUT</span><svg id="datalink-spark" viewBox="0 0 170 48" preserveAspectRatio="none"><path id="spark-path"></path></svg><strong>HIGH</strong></div>
+            <div class="telemetry-line"><span>LATENCY</span><i></i><strong>LOW</strong></div>
+            <div class="telemetry-line"><span>TELEMETRY</span><i></i><strong>NOMINAL</strong></div>
           </section>
         </aside>
       </section>
 
       <nav class="bottom-nav" aria-label="Display modes">
-        <button class="nav-icon active" title="Map" aria-label="Map">
-          <svg viewBox="0 0 32 32"><path d="M4 7l8-3 8 3 8-3v21l-8 3-8-3-8 3zM12 4v21M20 7v21"/></svg>
-        </button>
-        <button class="nav-icon" title="Route" aria-label="Route">
-          <svg viewBox="0 0 32 32"><circle cx="7" cy="24" r="3"/><circle cx="25" cy="8" r="3"/><path d="M9 22c5-6 8-4 11-8l3-4"/></svg>
-        </button>
-        <button class="nav-icon" title="Payload" aria-label="Payload">
-          <svg viewBox="0 0 32 32"><rect x="7" y="7" width="18" height="18" rx="2"/><circle cx="16" cy="16" r="5"/><path d="M16 2v5M16 25v5M2 16h5M25 16h5"/></svg>
-        </button>
-        <button class="nav-icon" title="Link" aria-label="Link">
-          <svg viewBox="0 0 32 32"><path d="M5 24a15 15 0 0 1 22 0M9 20a10 10 0 0 1 14 0M13 16a5 5 0 0 1 6 0"/><circle cx="16" cy="25" r="2"/></svg>
-        </button>
-        <button class="nav-icon" title="Systems" aria-label="Systems">
-          <svg viewBox="0 0 32 32"><path d="M4 8h24M4 16h24M4 24h24"/><circle cx="11" cy="8" r="3"/><circle cx="21" cy="16" r="3"/><circle cx="14" cy="24" r="3"/></svg>
-        </button>
-        <button class="nav-icon" title="Files" aria-label="Files">
-          <svg viewBox="0 0 32 32"><path d="M4 8h10l3 4h11v14H4z"/></svg>
-        </button>
-        <button class="nav-icon" title="Settings" aria-label="Settings">
-          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v5M16 24v5M3 16h5M24 16h5M7 7l4 4M21 21l4 4M25 7l-4 4M11 21l-4 4"/></svg>
-        </button>
+        <button class="nav-icon active" title="Map" aria-label="Map"><svg viewBox="0 0 32 32"><path d="M4 7l8-3 8 3 8-3v21l-8 3-8-3-8 3zM12 4v21M20 7v21"/></svg></button>
+        <button class="nav-icon" title="Route" aria-label="Route"><svg viewBox="0 0 32 32"><circle cx="7" cy="24" r="3"/><circle cx="25" cy="8" r="3"/><path d="M9 22c5-6 8-4 11-8l3-4"/></svg></button>
+        <button class="nav-icon" title="Target" aria-label="Target"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="8"/><circle cx="16" cy="16" r="2"/><path d="M16 2v6M16 24v6M2 16h6M24 16h6"/></svg></button>
+        <button class="nav-icon" title="Recorder" aria-label="Recorder"><svg viewBox="0 0 32 32"><rect x="7" y="8" width="18" height="18" rx="2"/><path d="M11 4h10M10 13h12M12 18h8"/></svg></button>
+        <button class="nav-icon" title="Link" aria-label="Link"><svg viewBox="0 0 32 32"><path d="M5 24a15 15 0 0 1 22 0M9 20a10 10 0 0 1 14 0M13 16a5 5 0 0 1 6 0"/><circle cx="16" cy="25" r="2"/></svg></button>
+        <button class="nav-icon" title="Telemetry" aria-label="Telemetry"><svg viewBox="0 0 32 32"><path d="M3 17h6l3-8 5 16 4-12 3 4h5"/></svg></button>
+        <button class="nav-icon" title="Files" aria-label="Files"><svg viewBox="0 0 32 32"><path d="M4 8h10l3 4h11v14H4z"/></svg></button>
+        <button class="nav-icon" title="Settings" aria-label="Settings"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 3v5M16 24v5M3 16h5M24 16h5M7 7l4 4M21 21l4 4M25 7l-4 4M11 21l-4 4"/></svg></button>
       </nav>
     </main>
   </div>
