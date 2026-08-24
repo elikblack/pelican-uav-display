@@ -134,7 +134,10 @@
         <div><span>RANGE</span><strong>120 NM</strong></div>
         <div><span>FILTER</span><strong>FL025+</strong></div>
         <div><span>TRACKS</span><strong>07 ACTIVE</strong></div>
-        <div class="air-alert"><span>ALERTS</span><strong>01 CORRIDOR</strong></div>
+        <div class="air-alert">
+          <b style="display:block;margin:0 0 3px;color:#e6c55d;font:800 8px/.95 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;letter-spacing:-.04em">[MESSAGE LIST]</b>
+          <div id="air-message-feed" style="height:calc(100% - 11px);overflow:hidden"></div>
+        </div>
       </div>
     `;
 
@@ -144,6 +147,99 @@
       <span class="neutral">□ COAST</span>
       <span class="unknown">● UNCORR</span>
     `;
+  }
+
+  function startAirMessageFeed() {
+    const feed = document.getElementById('air-message-feed');
+    if (!feed) return;
+
+    const messages = [
+      '1  CORRIDOR TRACK\n   BRG 176  RNG 4.2NM\n   CPA 3.1NM  TUP 35:57',
+      '2  TRACK UPDATE\n   T03 CORRELATED\n   ALT FL080  TRK 247',
+      '3  SENSOR NOTICE\n   COAST N42 AGE 01.2\n   AUTO REACQ ENABLED',
+      '4  IFF CORRELATION\n   A17 CODE 3124\n   QUALITY 086',
+      '5  RANGE FILTER\n   FL025+ ACTIVE\n   07 TRACKS DISPLAYED',
+      '6  WIND DATA\n   DRF 014°  006KT\n   SOURCE AUTO',
+      '7  TRACK T11\n   BRG 091  RNG 3.3NM\n   ALT FL055  SPD 191KT',
+      '8  SECTOR ENTRY\n   N31  R-2307\n   MONITOR ONLY',
+      '9  POSITION REF\n   GS POSN VALID\n   DATUM LOCAL',
+      '0  CORRIDOR WARN\n   T03 LIMIT 2.8NM\n   VECTOR REVIEW'
+    ];
+
+    const entryStyle = [
+      'box-sizing:border-box',
+      'margin:0 0 5px',
+      'color:#e3c15a',
+      'white-space:pre-wrap',
+      'font:800 7.5px/1.12 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace',
+      'letter-spacing:-.045em',
+      'transform-origin:top left'
+    ].join(';');
+
+    function makeEntry(text) {
+      const entry = document.createElement('div');
+      entry.className = 'air-message-entry';
+      entry.style.cssText = entryStyle;
+      entry.textContent = text;
+      return entry;
+    }
+
+    [messages[4], messages[3], messages[2], messages[1], messages[0]].forEach(message => {
+      feed.appendChild(makeEntry(message));
+    });
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let nextMessage = 5;
+
+    function typeEntry(entry, text) {
+      if (reducedMotion) {
+        entry.textContent = text;
+        return;
+      }
+
+      entry.textContent = '';
+      let index = 0;
+      const timer = setInterval(() => {
+        index += 1;
+        entry.textContent = text.slice(0, index);
+        if (index >= text.length) clearInterval(timer);
+      }, 22);
+    }
+
+    function addMessage() {
+      const text = messages[nextMessage % messages.length];
+      nextMessage += 1;
+
+      const oldEntries = [...feed.children];
+      const entry = makeEntry('');
+      feed.insertBefore(entry, feed.firstChild);
+
+      const shift = entry.getBoundingClientRect().height + 5;
+      if (!reducedMotion) {
+        oldEntries.forEach(oldEntry => {
+          oldEntry.animate(
+            [
+              { transform: `translateY(${-shift}px)` },
+              { transform: 'translateY(0)' }
+            ],
+            { duration: 280, easing: 'steps(4,end)' }
+          );
+        });
+      }
+
+      typeEntry(entry, text);
+
+      setTimeout(() => {
+        while (feed.children.length > 5) {
+          feed.lastElementChild.remove();
+        }
+      }, reducedMotion ? 0 : 320);
+
+      const nextDelay = 8000 + Math.round(Math.random() * 4000);
+      setTimeout(addMessage, nextDelay);
+    }
+
+    setTimeout(addMessage, 5500);
   }
 
   function curveWeatherHeadingScale() {
@@ -290,6 +386,7 @@
   }
 
   buildAirspacePlot();
+  startAirMessageFeed();
   curveWeatherHeadingScale();
   startWeatherFrameAnimation();
   fitDisplay();
