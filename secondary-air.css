@@ -91,13 +91,14 @@
 .air-contact.contact-f{--dx:22px;--dy:5px;--move-time:37s;--move-delay:-31s;--pulse-time:3.6s;--pulse-delay:-2.8s}
 .air-contact.contact-g{--dx:-16px;--dy:12px;--move-time:30s;--move-delay:-14s;--pulse-time:4.9s;--pulse-delay:-.4s}
 
-/* Right-side data rail: deliberately chunky, stepped and compressed. */
+/* Crowded old-console data rail. The labels are genuinely smaller than the
+   values; micro-readouts deliberately occupy the gaps between primary rows. */
 .air-module .radar-side-data{
   position:relative;
   align-self:stretch;
   height:auto;
-  padding:5px 6px 7px;
-  border:2px solid rgba(119,201,91,.9);
+  padding:4px 5px 6px;
+  border:2px solid rgba(119,201,91,.92);
   background:#020402;
   display:flex;
   flex-direction:column;
@@ -105,103 +106,148 @@
   overflow:hidden;
   box-shadow:inset 0 0 0 1px rgba(119,201,91,.07);
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  color:var(--green);
 }
 
-.air-module .radar-side-data::before{
-  content:"";
-  order:5;
-  display:block;
-  height:27px;
-  margin:2px -6px 0;
-  border-top:2px solid rgba(119,201,91,.9);
-  border-bottom:2px solid rgba(119,201,91,.9);
-  background:
-    linear-gradient(#020402,#020402) padding-box;
-}
-
-.air-module .radar-side-data::after{
-  content:"POS  --°--.--- N\A      ---°--.--- W";
-  position:absolute;
-  left:6px;
-  right:6px;
-  top:124px;
-  color:#dfffd4;
-  white-space:pre;
-  font:700 8px/1.08 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:-.02em;
-  text-align:right;
-}
-
-.air-module .radar-side-data>div{
+.air-module .radar-side-data>div:not(.air-alert){
+  position:relative;
   min-height:0;
-  height:29px;
+  height:34px;
   padding:0;
   border:0;
   display:grid;
-  grid-template-columns:34px 1fr;
+  grid-template-columns:29px 1fr;
   align-items:center;
-  gap:3px;
-  order:1;
+  gap:2px;
+  flex:0 0 auto;
 }
 
-.air-module .radar-side-data>div:nth-child(4){order:2}
-.air-module .radar-side-data .air-alert{order:6}
+.air-module .radar-side-data>div:nth-child(1){height:35px}
+.air-module .radar-side-data>div:nth-child(2){height:40px;margin-top:-2px}
+.air-module .radar-side-data>div:nth-child(3){height:35px;margin-top:8px}
+.air-module .radar-side-data>div:nth-child(4){height:36px;margin-top:-2px}
 
-.air-module .radar-side-data span{
-  color:#e9ffe3;
-  opacity:1;
-  font:800 7px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+/* Hide the modern source copy; generated text below gives us the console shorthand. */
+.air-module .radar-side-data>div:not(.air-alert)>span,
+.air-module .radar-side-data>div:not(.air-alert)>strong{font-size:0}
+
+.air-module .radar-side-data>div:not(.air-alert)>span::after{
+  display:inline-grid;
+  place-items:center;
+  box-sizing:border-box;
+  min-width:22px;
+  min-height:14px;
+  color:var(--green);
+  font:800 6.2px/.8 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
   letter-spacing:-.07em;
-  text-align:left;
-  transform:scaleX(.82);
-  transform-origin:left center;
+  text-align:center;
+  text-shadow:0 0 2px rgba(119,201,91,.22);
 }
 
-.air-module .radar-side-data strong{
-  color:#f2ffed;
-  font:800 17px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:-.065em;
+.air-module .radar-side-data>div:nth-child(1)>span::after,
+.air-module .radar-side-data>div:nth-child(2)>span::after{
+  border:1.5px solid rgba(119,201,91,.94);
+  padding:2px 1px 1px;
+}
+
+.air-module .radar-side-data>div:not(.air-alert)>strong{
+  position:relative;
+  display:block;
+  color:var(--green);
   text-align:right;
   white-space:nowrap;
-  text-shadow:0 0 3px rgba(119,201,91,.2);
 }
 
-/* Replace the clean modern labels/values with older-console shorthand. */
-.air-module .radar-side-data>div:not(.air-alert) span,
-.air-module .radar-side-data>div:not(.air-alert) strong{font-size:0}
-.air-module .radar-side-data>div:nth-child(1) span::after{content:"HDG"}
-.air-module .radar-side-data>div:nth-child(1) strong::after{content:"010.6°T"}
-.air-module .radar-side-data>div:nth-child(2) span::after{content:"SPD"}
-.air-module .radar-side-data>div:nth-child(2) strong::after{content:"7.0kt"}
-.air-module .radar-side-data>div:nth-child(3) span::after{content:"BRG"}
-.air-module .radar-side-data>div:nth-child(3) strong::after{content:"330.0°T"}
-.air-module .radar-side-data>div:nth-child(4) span::after{content:"RNG"}
-.air-module .radar-side-data>div:nth-child(4) strong::after{content:"4.2NM"}
-
-.air-module .radar-side-data>div:not(.air-alert) span::after{
-  font:800 7px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:-.07em;
+.air-module .radar-side-data>div:not(.air-alert)>strong::after{
+  color:var(--green);
+  font:900 25px/.76 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.09em;
+  text-shadow:0 0 4px rgba(119,201,91,.22);
 }
 
-.air-module .radar-side-data>div:not(.air-alert) strong::after{
-  font:800 17px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:-.065em;
+.air-module .radar-side-data>div:nth-child(1)>span::after{content:"HDG"}
+.air-module .radar-side-data>div:nth-child(1)>strong::after{content:"010.6°T";font-size:26px}
+.air-module .radar-side-data>div:nth-child(2)>span::after{content:"SPD"}
+.air-module .radar-side-data>div:nth-child(2)>strong::after{content:"7.0kt";font-size:30px}
+.air-module .radar-side-data>div:nth-child(3)>span::after{content:"BRG"}
+.air-module .radar-side-data>div:nth-child(3)>strong::after{content:"330.0°T";font-size:25px}
+.air-module .radar-side-data>div:nth-child(4)>span::after{content:"RNG"}
+.air-module .radar-side-data>div:nth-child(4)>strong::after{content:"4.2NM";font-size:28px}
+
+/* Tiny two-line suffix immediately after the large speed value. */
+.air-module .radar-side-data>div:nth-child(2)>strong{padding-right:23px}
+.air-module .radar-side-data>div:nth-child(2)>strong::before{
+  content:"MT\A WIND";
+  position:absolute;
+  right:-1px;
+  top:4px;
+  white-space:pre;
+  color:var(--green);
+  font:900 6px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.08em;
+  text-align:left;
 }
 
-.air-module .radar-side-data>div:nth-child(1) strong::after{font-size:19px}
-.air-module .radar-side-data>div:nth-child(2) strong::after{font-size:22px}
-.air-module .radar-side-data>div:nth-child(3) strong::after{font-size:18px}
-.air-module .radar-side-data>div:nth-child(4) strong::after{font-size:20px}
+/* Deliberately wedged into the inter-row gap, echoing the tiny supplemental
+   velocity readout in the reference display. */
+.air-module .radar-side-data>div:nth-child(2)::before{
+  content:"DRF";
+  position:absolute;
+  left:30px;
+  bottom:-8px;
+  color:var(--green);
+  font:800 5.8px/.8 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.08em;
+}
+
+.air-module .radar-side-data>div:nth-child(2)::after{
+  content:"**.*kt";
+  position:absolute;
+  right:23px;
+  bottom:-10px;
+  color:var(--green);
+  font:900 9px/.8 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.09em;
+}
+
+/* Position strip. Coordinates remain intentionally synthetic. */
+.air-module .radar-side-data::before{
+  content:"GS POSN";
+  display:flex;
+  align-items:flex-start;
+  box-sizing:border-box;
+  height:35px;
+  margin:1px -5px 0;
+  padding:4px 5px 0;
+  border-top:2px solid rgba(119,201,91,.92);
+  border-bottom:2px solid rgba(119,201,91,.92);
+  color:var(--green);
+  font:800 6.5px/.9 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.06em;
+}
+
+.air-module .radar-side-data::after{
+  content:"--°--.--- N\A---°--.--- W";
+  position:absolute;
+  right:6px;
+  top:161px;
+  color:var(--green);
+  white-space:pre;
+  font:900 8.5px/1.05 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.055em;
+  text-align:right;
+  text-shadow:0 0 2px rgba(119,201,91,.18);
+}
 
 /* Dense amber operator/message area. No frame, only a color change. */
 .air-module .radar-side-data .air-alert{
   position:absolute;
   left:7px;
   right:7px;
-  top:158px;
-  bottom:7px;
+  top:196px;
+  bottom:6px;
   margin:0;
-  padding:4px 2px 0;
+  padding:4px 1px 0;
   border:0;
   background:transparent;
   display:block;
