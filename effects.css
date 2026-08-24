@@ -1,0 +1,45 @@
+:root{
+  --route-done:#315c58;
+  --throughput-yellow:#f2d35e;
+  --throughput-orange:#ed8b2f;
+}
+
+/* Completed route becomes a quieter solid trace while the future path stays bright/dashed. */
+.route-progress-path{
+  stroke:var(--route-done);
+  stroke-width:5.5;
+  opacity:.92;
+  filter:drop-shadow(0 0 2px rgba(49,92,88,.28));
+}
+
+/* Survey boxes are assembled one corner/quadrant at a time during the loiter orbit. */
+.aoi-box{pointer-events:none}
+.aoi-quadrant{
+  fill:none;
+  stroke:var(--amber);
+  stroke-width:3;
+  vector-effect:non-scaling-stroke;
+  opacity:0;
+  transition:opacity .18s ease,stroke .22s ease,filter .22s ease;
+}
+.aoi-box.active .aoi-quadrant.revealed{
+  opacity:.96;
+  stroke:var(--throughput-orange);
+  filter:drop-shadow(0 0 5px rgba(237,139,47,.48));
+}
+.aoi-box.completed .aoi-quadrant{
+  opacity:.36;
+  stroke:var(--amber);
+  filter:none;
+}
+
+/* The telemetry trace is intentionally warmer than the rest of the avionics UI. */
+.throughput svg{
+  background:linear-gradient(180deg,rgba(242,211,94,.035),rgba(237,139,47,.012) 55%,transparent);
+}
+.throughput path{
+  stroke-width:1.9;
+  filter:drop-shadow(0 0 3px rgba(237,139,47,.48));
+  opacity:.98;
+}
+.throughput strong{color:var(--throughput-yellow)}
