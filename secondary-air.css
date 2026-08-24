@@ -235,6 +235,38 @@
   opacity:1;
 }
 
+.secondary-tab[data-tab="maintenance"]{
+  opacity:.78;
+}
+
+.secondary-tab[data-tab="maintenance"]::before{
+  content:"1";
+  display:grid;
+  place-items:center;
+  position:absolute;
+  top:5px;
+  right:7px;
+  min-width:16px;
+  height:15px;
+  padding:0 3px;
+  border:1px solid rgba(215,170,53,.72);
+  background:rgba(215,170,53,.08);
+  color:var(--amber);
+  font-size:9px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:0;
+}
+
+.secondary-tab[data-tab="maintenance"].active{
+  opacity:1;
+}
+
+.secondary-tab[data-tab="maintenance"].active::before{
+  border-color:var(--amber);
+  background:rgba(215,170,53,.13);
+}
+
 @keyframes airTrackMove{
   from{transform:translate(0,0)}
   to{transform:translate(var(--dx),var(--dy))}
