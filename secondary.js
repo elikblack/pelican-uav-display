@@ -9,6 +9,143 @@
     display.style.transform = `translate(-50%, -50%) scale(${scale})`;
   }
 
+  function buildAirspacePlot() {
+    const radarModule = document.querySelector('.air-module');
+    const radarBody = radarModule && radarModule.querySelector('.radar-module-body');
+    const radarLegend = radarModule && radarModule.querySelector('.radar-legend');
+    if (!radarModule || !radarBody || !radarLegend) return;
+
+    if (!document.querySelector('link[href="secondary-air.css"]')) {
+      const stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.href = 'secondary-air.css';
+      document.head.appendChild(stylesheet);
+    }
+
+    radarBody.innerHTML = `
+      <svg class="airspace-plot" viewBox="0 0 390 320" role="img" aria-label="Local tactical airspace surveillance plot">
+        <g class="airspace-geometry" aria-hidden="true">
+          <path class="air-geo-line strong" d="M15 286A250 250 0 0 1 377 39"/>
+          <path class="air-geo-line" d="M42 264A210 210 0 0 1 353 58"/>
+          <path class="air-geo-line" d="M76 238A163 163 0 0 1 326 84"/>
+          <path class="air-geo-zone" d="M48 80L151 43L246 69L337 55L365 145L313 246L187 279L73 231Z"/>
+          <path class="air-geo-zone" d="M111 112L177 87L247 103L281 158L247 211L168 225L103 190Z"/>
+          <path class="air-geo-dash" d="M16 271L356 68"/>
+          <path class="air-geo-dash" d="M70 25L347 292"/>
+          <path class="air-geo-dash" d="M8 173L380 173"/>
+          <path class="air-geo-line" d="M201 4L188 63M388 202L328 184M29 112L91 131"/>
+
+          <g transform="translate(87 90)">
+            <circle class="air-geo-circle" r="19"/>
+            <text class="air-geo-label" x="0" y="3" text-anchor="middle">21</text>
+          </g>
+          <g transform="translate(305 82)">
+            <circle class="air-geo-circle" r="17"/>
+            <text class="air-geo-label" x="0" y="3" text-anchor="middle">23</text>
+          </g>
+          <g transform="translate(300 237)">
+            <circle class="air-geo-circle" r="21"/>
+            <text class="air-geo-label" x="0" y="3" text-anchor="middle">24</text>
+          </g>
+          <g transform="translate(112 248)">
+            <circle class="air-geo-circle" r="14"/>
+            <text class="air-geo-label" x="0" y="3" text-anchor="middle">19</text>
+          </g>
+
+          <path class="air-waypoint" d="M188 151h16M196 143v16M54 205h12M60 199v12M332 135h12M338 129v12"/>
+          <text class="air-zone-label" x="55" y="68">SECTOR 4A</text>
+          <text class="air-zone-label" x="251" y="47">R-2307</text>
+          <text class="air-zone-label" x="119" y="214">TAC CORRIDOR</text>
+          <text class="air-zone-label" x="286" y="269">HOLD 24</text>
+        </g>
+
+        <g class="airspace-live-layer">
+          <g class="air-contact-wrap drift-a" transform="translate(125 197)">
+            <g class="air-contact contact-a">
+              <path class="air-track" d="M-34 19L-8 4"/>
+              <path class="air-symbol" d="M0 -5L5 4H-5Z"/>
+              <circle class="air-dot" cx="0" cy="0" r="1.4"/>
+              <text class="air-readout" x="9" y="-2">A17  176</text>
+              <text class="air-readout dim" x="9" y="10">FL120  312KT</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap" transform="translate(169 225)">
+            <g class="air-contact contact-b coast">
+              <path class="air-track" d="M-17 -13L-5 -4"/>
+              <rect class="air-symbol" x="-4" y="-4" width="8" height="8"/>
+              <text class="air-readout" x="9" y="-1">N42</text>
+              <text class="air-readout dim" x="9" y="10">095</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap drift-b" transform="translate(211 205)">
+            <g class="air-contact contact-c tracked">
+              <path class="air-track" d="M-39 27L-7 5"/>
+              <path class="air-symbol" d="M0 -6L6 0L0 6L-6 0Z"/>
+              <rect class="track-box" x="-11" y="-11" width="22" height="22"/>
+              <text class="air-readout" x="15" y="-3">T03  144</text>
+              <text class="air-readout dim" x="15" y="9">FL080  268KT</text>
+              <text class="air-readout dim" x="15" y="20">TRK 247</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap" transform="translate(250 104)">
+            <g class="air-contact contact-d">
+              <path class="air-track" d="M-25 18L-6 4"/>
+              <path class="air-symbol" d="M0 -5L5 4H-5Z"/>
+              <text class="air-readout" x="9" y="-2">A08  312</text>
+              <text class="air-readout dim" x="9" y="10">FL260</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap" transform="translate(187 78)">
+            <g class="air-contact contact-e coast">
+              <path class="air-track" d="M8 15L2 5"/>
+              <rect class="air-symbol" x="-4" y="-4" width="8" height="8"/>
+              <text class="air-readout" x="9" y="-1">N31</text>
+              <text class="air-readout dim" x="9" y="10">223</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap" transform="translate(318 164)">
+            <g class="air-contact contact-f tracked">
+              <path class="air-track" d="M-30 -6L-8 -2"/>
+              <path class="air-symbol" d="M0 -6L6 0L0 6L-6 0Z"/>
+              <rect class="track-box" x="-10" y="-10" width="20" height="20"/>
+              <text class="air-readout" x="14" y="-2">T11  091</text>
+              <text class="air-readout dim" x="14" y="10">FL055  191KT</text>
+            </g>
+          </g>
+
+          <g class="air-contact-wrap" transform="translate(74 279)">
+            <g class="air-contact contact-g coast">
+              <path class="air-track" d="M20 -13L5 -3"/>
+              <circle class="air-dot" r="2.2"/>
+              <text class="air-readout" x="8" y="-1">U06</text>
+              <text class="air-readout dim" x="8" y="10">067</text>
+            </g>
+          </g>
+        </g>
+      </svg>
+
+      <div class="radar-side-data">
+        <div><span>MODE</span><strong>AIRSPACE</strong></div>
+        <div><span>RANGE</span><strong>120 NM</strong></div>
+        <div><span>FILTER</span><strong>FL025+</strong></div>
+        <div><span>TRACKS</span><strong>07 ACTIVE</strong></div>
+        <div class="air-alert"><span>ALERTS</span><strong>01 CORRIDOR</strong></div>
+      </div>
+    `;
+
+    radarLegend.innerHTML = `
+      <span class="tracked-key">◇ TRACKED</span>
+      <span class="friendly">▲ CORRELATED</span>
+      <span class="neutral">□ COAST</span>
+      <span class="unknown">● UNCORR</span>
+    `;
+  }
+
   function curveWeatherHeadingScale() {
     const scale = document.querySelector('.wx-heading-scale');
     if (!scale) return;
@@ -152,6 +289,7 @@
     fields.uptime.textContent = formatUptime(uptimeSeconds);
   }
 
+  buildAirspacePlot();
   curveWeatherHeadingScale();
   startWeatherFrameAnimation();
   fitDisplay();
