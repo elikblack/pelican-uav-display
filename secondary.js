@@ -58,7 +58,7 @@
     setInterval(() => {
       frameIndex = (frameIndex + 1) % frames.length;
       frame.src = frames[frameIndex];
-    }, 330);
+    }, 1320);
   }
 
   tabs.forEach(tab => {
