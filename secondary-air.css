@@ -1,4 +1,4 @@
-@import url("secondary-tabs.css");
+.air-module{visibility:visible}
 
 .air-module .radar-module-body{
   grid-template-columns:minmax(0,1fr) 138px;
@@ -69,9 +69,7 @@
   letter-spacing:.035em;
 }
 
-.air-contact-wrap{
-  color:var(--green);
-}
+.air-contact-wrap{color:var(--green)}
 
 .air-contact{
   --dx:16px;
@@ -223,9 +221,7 @@
   font-weight:700;
 }
 
-.air-module .radar-side-data .air-alert strong{
-  color:var(--amber);
-}
+.air-module .radar-side-data .air-alert strong{color:var(--amber)}
 
 .air-module .radar-legend{
   gap:22px;
