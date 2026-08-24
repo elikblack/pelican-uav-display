@@ -77,7 +77,7 @@
   --pulse-time:4.2s;
   --pulse-delay:0s;
   --peak-opacity:.96;
-  --low-opacity:.34;
+  --low-opacity:.6;
   fill:none;
   stroke:var(--green);
   stroke-width:1.2;
@@ -121,7 +121,7 @@
 
 .air-contact.tracked{
   --peak-opacity:1;
-  --low-opacity:.5;
+  --low-opacity:.74;
   color:#a6ec7d;
 }
 
@@ -134,8 +134,8 @@
 }
 
 .air-contact.coast{
-  --peak-opacity:.72;
-  --low-opacity:.16;
+  --peak-opacity:.78;
+  --low-opacity:.4;
 }
 
 .air-contact.contact-a{
@@ -241,11 +241,11 @@
 }
 
 @keyframes airContactPulse{
-  0%,7%{opacity:var(--peak-opacity)}
-  28%{opacity:.72}
+  0%,8%{opacity:var(--peak-opacity)}
+  32%{opacity:.84}
   68%{opacity:var(--low-opacity)}
   84%{opacity:var(--low-opacity)}
-  94%{opacity:.62}
+  95%{opacity:.82}
   100%{opacity:var(--peak-opacity)}
 }
 
