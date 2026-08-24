@@ -1,28 +1,55 @@
 .secondary-tab{
-  border:2px solid var(--line-soft);
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  height:48px;
+  padding:0 18px 0 24px;
+  border:0;
   clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px);
-  background:transparent;
+  background:var(--line-soft);
   opacity:.72;
-  transition:background-color .16s ease,color .16s ease,border-color .16s ease,opacity .16s ease;
+  text-align:left;
+  transform:translateY(3px);
+  transition:background-color .16s ease,color .16s ease,opacity .16s ease,transform .16s ease;
+}
+
+.secondary-tab::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  z-index:-1;
+  clip-path:polygon(8px 0,100% 0,100% 100%,0 100%,0 8px);
+  background:#010201;
 }
 
 .secondary-tab.active{
+  z-index:2;
   color:#010201;
   opacity:1;
-  border-color:var(--green);
-  border-bottom-color:var(--green);
   background:var(--green);
   box-shadow:none;
+  transform:translateY(0);
 }
 
-.secondary-tab.active:after{
+.secondary-tab.active::after{
   content:none;
 }
 
 .secondary-tab:not(.active):hover{
   opacity:.9;
-  border-color:rgba(119,201,91,.7);
-  background:rgba(119,201,91,.045);
+  background:rgba(119,201,91,.72);
+}
+
+.secondary-tab:not(.active):hover::after{
+  background:#031005;
+}
+
+.settings-tab{
+  display:grid;
+  place-items:center;
+  padding:0;
 }
 
 .settings-tab svg{
@@ -35,19 +62,50 @@
   stroke-linejoin:round;
 }
 
-.settings-tab svg circle{
-  fill:#010201;
-  stroke:currentColor;
-  stroke-width:1.4;
+/* The source SVG's filled path paints over its circle, so make the center
+   knockout a top-layer UI element instead. */
+.settings-tab::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:4;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#010201;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
 }
 
-.settings-tab.active svg circle{
-  fill:var(--green);
-  stroke:#010201;
+.settings-tab.active::before{
+  background:var(--green);
+}
+
+.secondary-tab[data-tab="maintenance"]{
+  padding-left:48px;
 }
 
 .secondary-tab[data-tab="maintenance"]::before{
+  content:"1";
+  display:grid;
+  place-items:center;
+  position:absolute;
+  left:16px;
+  right:auto;
+  top:50%;
   z-index:3;
+  min-width:16px;
+  height:15px;
+  padding:0 3px;
+  border:1px solid rgba(215,170,53,.72);
+  background:rgba(215,170,53,.08);
+  color:var(--amber);
+  font-size:9px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:0;
+  transform:translateY(-50%);
 }
 
 .secondary-tab[data-tab="maintenance"].active::before{
