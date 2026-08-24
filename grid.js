@@ -87,8 +87,12 @@
   const firstUiOverlay = mapPanel.querySelector('.map-overlay, .route-progress-readout');
   mapPanel.insertBefore(overlay, firstUiOverlay || null);
 
+  let lastMapTransform = '';
   function syncTransform() {
-    world.style.transform = mapWorld.style.transform || 'translate3d(0,0,0)';
+    const nextTransform = mapWorld.style.transform || 'translate3d(0,0,0)';
+    if (nextTransform === lastMapTransform) return;
+    lastMapTransform = nextTransform;
+    world.style.transform = nextTransform;
   }
 
   let activeCellKey = '';
@@ -98,15 +102,26 @@
     horizontalLines.forEach(line => line.classList.remove('tracking'));
   }
 
-  function updateTrackingCell() {
+  function aircraftPosition() {
+    const transformList = aircraft.transform && aircraft.transform.baseVal;
+    if (transformList && transformList.numberOfItems > 0) {
+      const firstTransform = transformList.getItem(0);
+      return { x: firstTransform.matrix.e, y: firstTransform.matrix.f };
+    }
+
+    // Fallback for browsers that do not expose the SVG transform list as expected.
     const transform = aircraft.getAttribute('transform') || '';
     const match = transform.match(/translate\(\s*(-?\d+(?:\.\d+)?)\s*[ ,]\s*(-?\d+(?:\.\d+)?)\s*\)/);
-    if (!match) return;
+    if (!match) return null;
+    return { x: Number(match[1]), y: Number(match[2]) };
+  }
 
-    const x = Number(match[1]);
-    const y = Number(match[2]);
-    const colIndex = Math.floor((x - startX) / spacingX);
-    const rowIndex = Math.floor((y - startY) / spacingY);
+  function updateTrackingCell() {
+    const position = aircraftPosition();
+    if (!position) return;
+
+    const colIndex = Math.floor((position.x - startX) / spacingX);
+    const rowIndex = Math.floor((position.y - startY) / spacingY);
 
     if (colIndex < 0 || rowIndex < 0 || colIndex + 1 >= verticalLines.length || rowIndex + 1 >= horizontalLines.length) {
       if (activeCellKey) {
@@ -127,12 +142,11 @@
     horizontalLines[rowIndex + 1].classList.add('tracking');
   }
 
-  syncTransform();
-  updateTrackingCell();
+  function frameSync() {
+    syncTransform();
+    updateTrackingCell();
+    requestAnimationFrame(frameSync);
+  }
 
-  const worldObserver = new MutationObserver(syncTransform);
-  worldObserver.observe(mapWorld, { attributes: true, attributeFilter: ['style'] });
-
-  const aircraftObserver = new MutationObserver(updateTrackingCell);
-  aircraftObserver.observe(aircraft, { attributes: true, attributeFilter: ['transform'] });
+  frameSync();
 })();
