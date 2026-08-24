@@ -11,7 +11,7 @@ Browser-based display graphics for the Pelican demo case.
 ## Design goals
 
 - Dark military / restrained glass-cockpit aesthetic
-- Static fictional satellite terrain with animated route preview
+- Generated fictional arid satellite-style terrain with animated route preview
 - Editable labels, icons, colors, timing, waypoint data, and map motion
 - Plain HTML/CSS/JavaScript with no build step
 
@@ -30,8 +30,11 @@ Browser-based display graphics for the Pelican demo case.
 - `Space` — pause/resume animation
 - `R` — restart route preview
 
+## Current
+
+The primary display now uses the generated fictional desert terrain plate and keeps the map synchronized behind the translucent side instruments.
+
 ## Next
 
-1. Add oversized fictional arid satellite terrain asset.
-2. Dial in the primary 1080p layout and route animation.
-3. Build the 1920×480 secondary display using the same shared visual language.
+1. Fine-tune primary terrain framing and route placement if needed.
+2. Build the 1920×480 secondary display using the same shared visual language.
