@@ -3,29 +3,148 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pelican UAV Display — Secondary</title>
+  <title>Pelican UAV Display — Secondary Preflight</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="secondary.css">
 </head>
 <body>
   <div id="screen-fit">
-    <main id="secondary-display" class="display secondary-shell" aria-label="Secondary 8.8-inch display">
-      <header class="topbar" style="height:64px;grid-template-columns:360px 1fr 165px">
-        <div class="brand-block">
-          <div class="brand-title">SYSTEMS / PAYLOAD</div>
-          <div class="brand-subtitle">SECONDARY DISPLAY / 1920×480</div>
-        </div>
-        <div class="status-ribbon">
-          <div class="status-chip good">SYSTEM READY</div>
-          <div class="status-chip good">LINK GOOD</div>
-          <div class="status-chip amber">STANDBY</div>
-        </div>
-        <div class="clock-block"><div id="secondary-clock">--:--:--</div><div>LOCAL</div></div>
-      </header>
-      <section class="secondary-content">
-        <div>
-          8.8-INCH DISPLAY — NEXT PASS
-          <div class="secondary-note">Shared visual language is in place; content/layout intentionally left open for the next design step.</div>
-        </div>
+    <main id="secondary-display" class="display secondary-shell secondary-display" aria-label="Secondary preflight systems display">
+      <nav class="secondary-tabs" aria-label="Secondary display modes">
+        <button class="secondary-tab active" data-tab="preflight">PREFLIGHT</button>
+        <button class="secondary-tab" data-tab="avionics">AVIONICS</button>
+        <button class="secondary-tab" data-tab="payload">PAYLOAD</button>
+        <button class="secondary-tab" data-tab="systems">SYSTEMS</button>
+        <button class="secondary-tab" data-tab="maintenance">MAINTENANCE</button>
+        <button class="secondary-tab" data-tab="diagnostics">DIAGNOSTICS</button>
+        <button class="secondary-tab settings-tab" data-tab="settings" aria-label="Settings" title="Settings">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="5"/><path d="M16 3v5M16 24v5M3 16h5M24 16h5M7 7l4 4M21 21l4 4M25 7l-4 4M11 21l-4 4"/></svg>
+        </button>
+      </nav>
+
+      <section class="secondary-grid">
+        <article class="secondary-module radar-module air-module">
+          <header class="module-heading">LOCAL AIR RADAR</header>
+          <div class="radar-module-body">
+            <svg class="radar-scope" viewBox="0 0 390 320" role="img" aria-label="Local air surveillance radar">
+              <defs>
+                <radialGradient id="airSweep" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stop-color="#77c95b" stop-opacity=".16"/>
+                  <stop offset="1" stop-color="#77c95b" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <g class="radar-grid-svg">
+                <circle cx="195" cy="160" r="50"/>
+                <circle cx="195" cy="160" r="100"/>
+                <circle cx="195" cy="160" r="150"/>
+                <path d="M45 160H345M195 10V310"/>
+                <path d="M89 54L301 266M301 54L89 266" class="minor-axis"/>
+              </g>
+              <g class="radar-sweep air-sweep">
+                <path d="M195 160 L319 76 A150 150 0 0 1 345 160 Z" fill="url(#airSweep)"/>
+                <path d="M195 160L345 160" class="sweep-edge"/>
+              </g>
+              <g class="cardinals">
+                <text x="195" y="18">N</text><text x="195" y="314">S</text>
+                <text x="48" y="165">W</text><text x="342" y="165">E</text>
+              </g>
+              <g class="radar-contact contact-a" transform="translate(116 92)">
+                <path d="M0 -6L6 5H-6Z"/><text x="10" y="-2">256</text><text x="10" y="11">FL180</text>
+              </g>
+              <g class="radar-contact contact-b" transform="translate(102 214)">
+                <path d="M0 -6L6 5H-6Z"/><text x="10" y="-2">176</text><text x="10" y="11">FL120</text>
+              </g>
+              <g class="radar-contact contact-c" transform="translate(260 226)">
+                <path d="M0 -6L6 5H-6Z"/><text x="10" y="-2">144</text><text x="10" y="11">FL080</text>
+              </g>
+              <g class="radar-contact contact-d" transform="translate(278 112)">
+                <path d="M0 -6L6 5H-6Z"/><text x="10" y="-2">312</text><text x="10" y="11">FL260</text>
+              </g>
+              <circle cx="195" cy="160" r="5" class="radar-origin"/>
+            </svg>
+
+            <div class="radar-side-data">
+              <div><span>MODE</span><strong>SURVEILLANCE</strong></div>
+              <div><span>RANGE</span><strong>120 NM</strong></div>
+              <div><span>TILT</span><strong>0.5° UP</strong></div>
+              <div><span>ALT FILTER</span><strong>2,500 FT</strong></div>
+              <div><span>GAIN</span><strong>AUTO</strong></div>
+              <div><span>WX</span><strong>NORM</strong></div>
+              <div class="scan-line"><span>SCAN</span><strong>12.6 NM</strong></div>
+            </div>
+          </div>
+          <footer class="radar-legend"><span class="friendly">▲ FRIENDLY</span><span class="neutral">□ NEUTRAL</span><span class="unknown">◇ UNKNOWN</span></footer>
+        </article>
+
+        <article class="secondary-module status-module">
+          <header class="module-heading">GROUND STATION STATUS</header>
+          <div class="status-cards">
+            <div class="status-card"><span>TX POWER</span><strong id="tx-power">25.0 W</strong><i class="meter"><b id="tx-meter" style="width:62%"></b></i></div>
+            <div class="status-card"><span>POWER CONSUMPTION</span><strong id="power-consumption">232 W</strong><i class="meter"><b id="power-meter" style="width:68%"></b></i></div>
+            <div class="status-card"><span>SYSTEM VOLTAGE</span><strong id="system-voltage">27.6 V</strong><i class="meter"><b style="width:82%"></b></i></div>
+            <div class="status-card"><span>THERMAL</span><strong id="thermal">38°C</strong><i class="meter"><b id="thermal-meter" style="width:56%"></b></i></div>
+            <div class="status-card"><span>LINK MARGIN</span><strong id="link-margin">+18.2 dB</strong><i class="meter"><b id="link-meter" style="width:79%"></b></i></div>
+            <div class="status-card"><span>BATTERY</span><strong id="battery">92%</strong><i class="meter"><b style="width:92%"></b></i></div>
+          </div>
+          <div class="status-lower">
+            <div class="trend-panel">
+              <div class="trend-heading"><span>POWER / 60 SEC</span><strong id="trend-value">232 W</strong></div>
+              <svg viewBox="0 0 300 74" preserveAspectRatio="none" aria-label="Power trend"><path class="trend-grid" d="M0 18.5H300M0 37H300M0 55.5H300"/><polyline id="power-trace" points="0,52 12,49 24,45 36,48 48,40 60,44 72,41 84,46 96,39 108,42 120,38 132,44 144,36 156,39 168,35 180,40 192,34 204,36 216,31 228,35 240,29 252,32 264,26 276,30 288,24 300,27"/></svg>
+            </div>
+            <div class="status-summary">
+              <div><span>UPTIME</span><strong id="uptime">12:47:11</strong></div>
+              <div><span>DATA RATE</span><strong id="data-rate">8.2 Mbps</strong></div>
+              <div><span>LINK QUALITY</span><strong id="link-quality">92%</strong></div>
+              <div><span>HEALTH</span><strong class="good-state">GOOD</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="secondary-module radar-module weather-module">
+          <header class="module-heading">WEATHER RADAR</header>
+          <div class="radar-module-body weather-body">
+            <svg class="radar-scope weather-scope" viewBox="0 0 390 320" role="img" aria-label="Weather precipitation radar">
+              <defs>
+                <radialGradient id="weatherSweep" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stop-color="#77c95b" stop-opacity=".14"/>
+                  <stop offset="1" stop-color="#77c95b" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <g class="radar-grid-svg">
+                <circle cx="195" cy="160" r="50"/>
+                <circle cx="195" cy="160" r="100"/>
+                <circle cx="195" cy="160" r="150"/>
+                <path d="M45 160H345M195 10V310"/>
+              </g>
+              <g class="weather-returns">
+                <path class="weather-cell green cell-a" d="M76 87c12-18 36-22 54-10 11 8 16 22 11 34-8 19-34 28-53 18-17-9-24-28-12-42z"/>
+                <path class="weather-cell green cell-b" d="M105 205c17-21 43-27 64-13 17 11 22 35 9 51-16 20-47 25-67 10-16-12-19-33-6-48z"/>
+                <path class="weather-cell green cell-c" d="M226 190c23-38 68-50 95-24 21 20 16 54-8 72-31 23-76 18-94-10-8-13-6-25 7-38z"/>
+                <path class="weather-cell amber cell-d" d="M252 196c16-22 43-25 60-8 14 14 9 35-9 47-22 15-50 9-59-10-5-10-2-19 8-29z"/>
+                <path class="weather-cell amber cell-e" d="M91 91c8-11 23-13 33-4 8 7 6 19-3 26-12 9-27 6-32-5-2-6-2-11 2-17z"/>
+              </g>
+              <g class="radar-sweep weather-sweep">
+                <path d="M195 160 L319 76 A150 150 0 0 1 345 160 Z" fill="url(#weatherSweep)"/>
+                <path d="M195 160L345 160" class="sweep-edge"/>
+              </g>
+              <g class="cardinals">
+                <text x="195" y="18">N</text><text x="195" y="314">S</text>
+                <text x="48" y="165">W</text><text x="342" y="165">E</text>
+              </g>
+              <circle cx="195" cy="160" r="5" class="radar-origin"/>
+            </svg>
+
+            <div class="radar-side-data weather-data">
+              <div><span>MODE</span><strong>PRECIP</strong></div>
+              <div><span>RANGE</span><strong>160 NM</strong></div>
+              <div><span>INTENSITY</span><i class="intensity-scale"><b></b><b></b><b></b><b class="warn"></b><b class="warn"></b><b></b></i></div>
+              <div><span>CONDITIONS</span><strong>LIGHT–MOD</strong></div>
+              <div><span>WIND</span><strong>220° / 18 KT</strong></div>
+              <div class="scan-line"><span>SCAN</span><strong>8.0 NM</strong></div>
+            </div>
+          </div>
+          <footer class="weather-alert"><span class="alert-icon">△</span><div><span>WEATHER ALERT</span><strong>MODERATE PRECIPITATION · SOUTH / SOUTHEAST</strong></div><div class="alert-range"><span>RANGE</span><strong>40–90 NM</strong></div></footer>
+        </article>
       </section>
     </main>
   </div>
