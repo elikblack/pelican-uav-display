@@ -26,8 +26,11 @@
   stroke-width:1;
   vector-effect:non-scaling-stroke;
   shape-rendering:crispEdges;
+  transition:stroke .32s ease;
 }
 .coord-grid-line.major{stroke:rgba(188,202,180,.5)}
+.coord-grid-line.tracking,
+.coord-grid-line.major.tracking{stroke:rgba(188,202,180,.75)}
 .coord-grid-ref{
   fill:rgba(216,225,208,.75);
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
