@@ -76,9 +76,11 @@ window.DISPLAY_CONFIG = {
     image: "assets/terrain-desert.jpg",
     worldWidth: 2400,
     worldHeight: 1028,
-    startX: -250,
+    // Center the 2400 px terrain across the 1920 px workspace at mission start.
+    // The route coordinates are offset by the same amount so its on-screen composition stays put.
+    startX: -664,
     startY: -60,
-    endX: -520,
+    endX: -884,
     endY: -124
   },
 
@@ -98,11 +100,11 @@ window.DISPLAY_CONFIG = {
 
   route: {
     waypoints: [
-      { id: "STG", label: "STAGING", x: 316, y: 254 },
-      { id: "WPT 1", label: "", x: 738, y: 254 },
-      { id: "WPT 2", label: "", x: 931, y: 477 },
-      { id: "WPT 3", label: "", x: 803, y: 719 },
-      { id: "WPT 4", label: "", x: 727, y: 951 }
+      { id: "STG", label: "STAGING", x: 730, y: 254 },
+      { id: "WPT 1", label: "", x: 1152, y: 254 },
+      { id: "WPT 2", label: "", x: 1345, y: 477 },
+      { id: "WPT 3", label: "", x: 1217, y: 719 },
+      { id: "WPT 4", label: "", x: 1141, y: 951 }
     ]
   }
 };
