@@ -24,36 +24,12 @@
   shape-rendering:geometricPrecision;
 }
 
-.air-geo-line{
-  stroke:rgba(126,153,176,.40);
-  stroke-width:1.7;
-}
-
-.air-geo-line.strong{
-  stroke:rgba(145,173,196,.57);
-  stroke-width:2.2;
-}
-
-.air-geo-zone{
-  stroke:rgba(130,159,183,.46);
-  stroke-width:1.8;
-}
-
-.air-geo-dash{
-  stroke:rgba(130,159,183,.36);
-  stroke-width:1.45;
-  stroke-dasharray:8 6;
-}
-
-.air-geo-circle{
-  stroke:rgba(139,167,190,.45);
-  stroke-width:1.55;
-}
-
-.air-waypoint{
-  stroke:rgba(149,176,198,.56);
-  stroke-width:1.65;
-}
+.air-geo-line{stroke:rgba(126,153,176,.40);stroke-width:1.7}
+.air-geo-line.strong{stroke:rgba(145,173,196,.57);stroke-width:2.2}
+.air-geo-zone{stroke:rgba(130,159,183,.46);stroke-width:1.8}
+.air-geo-dash{stroke:rgba(130,159,183,.36);stroke-width:1.45;stroke-dasharray:8 6}
+.air-geo-circle{stroke:rgba(139,167,190,.45);stroke-width:1.55}
+.air-waypoint{stroke:rgba(149,176,198,.56);stroke-width:1.65}
 
 .air-geo-label{
   fill:rgba(166,190,210,.68);
@@ -91,23 +67,9 @@
     airContactPulse var(--pulse-time) ease-out var(--pulse-delay) infinite;
 }
 
-.air-contact .air-symbol{
-  fill:currentColor;
-  stroke:currentColor;
-  stroke-width:1.4;
-}
-
-.air-contact .air-dot{
-  fill:currentColor;
-  stroke:none;
-}
-
-.air-contact .air-track{
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.55;
-  opacity:.82;
-}
+.air-contact .air-symbol{fill:currentColor;stroke:currentColor;stroke-width:1.4}
+.air-contact .air-dot{fill:currentColor;stroke:none}
+.air-contact .air-track{fill:none;stroke:currentColor;stroke-width:1.55;opacity:.82}
 
 .air-contact .air-readout{
   fill:currentColor;
@@ -117,219 +79,179 @@
   letter-spacing:.015em;
 }
 
-.air-contact .air-readout.dim{
-  opacity:.76;
-  font-size:8.5px;
-  font-weight:600;
-}
+.air-contact .air-readout.dim{opacity:.76;font-size:8.5px;font-weight:600}
+.air-contact.tracked{--peak-opacity:1;--low-opacity:.74;color:#a6ec7d}
+.air-contact.tracked .track-box{fill:none;stroke:currentColor;stroke-width:1.65;stroke-dasharray:4 2;opacity:.9}
+.air-contact.coast{--peak-opacity:.78;--low-opacity:.4}
+.air-contact.contact-a{--dx:22px;--dy:-12px;--move-time:29s;--move-delay:-8s;--pulse-time:4.1s;--pulse-delay:-.7s}
+.air-contact.contact-b{--dx:16px;--dy:12px;--move-time:31s;--move-delay:-19s;--pulse-time:4.7s;--pulse-delay:-2.1s}
+.air-contact.contact-c{--dx:24px;--dy:-14px;--move-time:35s;--move-delay:-13s;--pulse-time:3.8s;--pulse-delay:-3s}
+.air-contact.contact-d{--dx:18px;--dy:-12px;--move-time:33s;--move-delay:-25s;--pulse-time:4.4s;--pulse-delay:-1.2s}
+.air-contact.contact-e{--dx:-12px;--dy:-18px;--move-time:28s;--move-delay:-5s;--pulse-time:5s;--pulse-delay:-3.5s}
+.air-contact.contact-f{--dx:22px;--dy:5px;--move-time:37s;--move-delay:-31s;--pulse-time:3.6s;--pulse-delay:-2.8s}
+.air-contact.contact-g{--dx:-16px;--dy:12px;--move-time:30s;--move-delay:-14s;--pulse-time:4.9s;--pulse-delay:-.4s}
 
-.air-contact.tracked{
-  --peak-opacity:1;
-  --low-opacity:.74;
-  color:#a6ec7d;
-}
-
-.air-contact.tracked .track-box{
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.65;
-  stroke-dasharray:4 2;
-  opacity:.9;
-}
-
-.air-contact.coast{
-  --peak-opacity:.78;
-  --low-opacity:.4;
-}
-
-.air-contact.contact-a{
-  --dx:22px;
-  --dy:-12px;
-  --move-time:29s;
-  --move-delay:-8s;
-  --pulse-time:4.1s;
-  --pulse-delay:-.7s;
-}
-
-.air-contact.contact-b{
-  --dx:16px;
-  --dy:12px;
-  --move-time:31s;
-  --move-delay:-19s;
-  --pulse-time:4.7s;
-  --pulse-delay:-2.1s;
-}
-
-.air-contact.contact-c{
-  --dx:24px;
-  --dy:-14px;
-  --move-time:35s;
-  --move-delay:-13s;
-  --pulse-time:3.8s;
-  --pulse-delay:-3s;
-}
-
-.air-contact.contact-d{
-  --dx:18px;
-  --dy:-12px;
-  --move-time:33s;
-  --move-delay:-25s;
-  --pulse-time:4.4s;
-  --pulse-delay:-1.2s;
-}
-
-.air-contact.contact-e{
-  --dx:-12px;
-  --dy:-18px;
-  --move-time:28s;
-  --move-delay:-5s;
-  --pulse-time:5s;
-  --pulse-delay:-3.5s;
-}
-
-.air-contact.contact-f{
-  --dx:22px;
-  --dy:5px;
-  --move-time:37s;
-  --move-delay:-31s;
-  --pulse-time:3.6s;
-  --pulse-delay:-2.8s;
-}
-
-.air-contact.contact-g{
-  --dx:-16px;
-  --dy:12px;
-  --move-time:30s;
-  --move-delay:-14s;
-  --pulse-time:4.9s;
-  --pulse-delay:-.4s;
-}
-
-/* Right-side operational rail: intentionally heavier and less polished than the
-   rest of the secondary display, borrowing the alignment and hierarchy of older
-   radar consoles without copying their full information density. */
+/* Right-side data rail: deliberately chunky, stepped and compressed. */
 .air-module .radar-side-data{
   position:relative;
   align-self:stretch;
   height:auto;
-  padding:26px 7px 7px;
-  border:2px solid rgba(119,201,91,.88);
+  padding:5px 6px 7px;
+  border:2px solid rgba(119,201,91,.9);
   background:#020402;
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
-  gap:0;
   overflow:hidden;
-  box-shadow:inset 0 0 0 1px rgba(119,201,91,.08);
+  box-shadow:inset 0 0 0 1px rgba(119,201,91,.07);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
 }
 
 .air-module .radar-side-data::before{
-  content:"TRACK DATA   1/7";
+  content:"";
+  order:5;
+  display:block;
+  height:27px;
+  margin:2px -6px 0;
+  border-top:2px solid rgba(119,201,91,.9);
+  border-bottom:2px solid rgba(119,201,91,.9);
+  background:
+    linear-gradient(#020402,#020402) padding-box;
+}
+
+.air-module .radar-side-data::after{
+  content:"POS  --°--.--- N\A      ---°--.--- W";
   position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:20px;
-  box-sizing:border-box;
-  padding:4px 6px 0;
-  border-bottom:2px solid rgba(119,201,91,.88);
-  color:#efffe9;
-  background:#020402;
-  font:700 9px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:.015em;
+  left:6px;
+  right:6px;
+  top:124px;
+  color:#dfffd4;
+  white-space:pre;
+  font:700 8px/1.08 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.02em;
+  text-align:right;
 }
 
 .air-module .radar-side-data>div{
   min-height:0;
-  height:auto;
-  padding:5px 1px 5px;
+  height:29px;
+  padding:0;
   border:0;
-  border-bottom:1px solid rgba(119,201,91,.42);
   display:grid;
-  grid-template-columns:54px 1fr;
-  align-items:baseline;
-  gap:4px;
+  grid-template-columns:34px 1fr;
+  align-items:center;
+  gap:3px;
+  order:1;
 }
 
+.air-module .radar-side-data>div:nth-child(4){order:2}
+.air-module .radar-side-data .air-alert{order:6}
+
 .air-module .radar-side-data span{
-  color:var(--green);
-  opacity:.92;
-  font-size:8px;
-  font-weight:700;
-  line-height:1;
-  letter-spacing:.025em;
+  color:#e9ffe3;
+  opacity:1;
+  font:800 7px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.07em;
   text-align:left;
+  transform:scaleX(.82);
+  transform-origin:left center;
 }
 
 .air-module .radar-side-data strong{
-  color:#efffe9;
-  font:700 12px/.9 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-  letter-spacing:0;
+  color:#f2ffed;
+  font:800 17px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.065em;
   text-align:right;
   white-space:nowrap;
+  text-shadow:0 0 3px rgba(119,201,91,.2);
 }
 
-.air-module .radar-side-data>div:nth-child(2) strong,
-.air-module .radar-side-data>div:nth-child(4) strong{
-  font-size:14px;
+/* Replace the clean modern labels/values with older-console shorthand. */
+.air-module .radar-side-data>div:not(.air-alert) span,
+.air-module .radar-side-data>div:not(.air-alert) strong{font-size:0}
+.air-module .radar-side-data>div:nth-child(1) span::after{content:"HDG"}
+.air-module .radar-side-data>div:nth-child(1) strong::after{content:"010.6°T"}
+.air-module .radar-side-data>div:nth-child(2) span::after{content:"SPD"}
+.air-module .radar-side-data>div:nth-child(2) strong::after{content:"7.0kt"}
+.air-module .radar-side-data>div:nth-child(3) span::after{content:"BRG"}
+.air-module .radar-side-data>div:nth-child(3) strong::after{content:"330.0°T"}
+.air-module .radar-side-data>div:nth-child(4) span::after{content:"RNG"}
+.air-module .radar-side-data>div:nth-child(4) strong::after{content:"4.2NM"}
+
+.air-module .radar-side-data>div:not(.air-alert) span::after{
+  font:800 7px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.07em;
 }
 
-.air-module .radar-side-data>div:nth-child(4){
-  border-bottom:2px solid rgba(119,201,91,.88);
-  padding-bottom:7px;
+.air-module .radar-side-data>div:not(.air-alert) strong::after{
+  font:800 17px/.82 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.065em;
 }
 
+.air-module .radar-side-data>div:nth-child(1) strong::after{font-size:19px}
+.air-module .radar-side-data>div:nth-child(2) strong::after{font-size:22px}
+.air-module .radar-side-data>div:nth-child(3) strong::after{font-size:18px}
+.air-module .radar-side-data>div:nth-child(4) strong::after{font-size:20px}
+
+/* Dense amber operator/message area. No frame, only a color change. */
 .air-module .radar-side-data .air-alert{
-  margin-top:6px;
-  padding:7px 5px 6px;
-  border:2px solid rgba(215,170,53,.88);
-  background:rgba(215,170,53,.055);
+  position:absolute;
+  left:7px;
+  right:7px;
+  top:158px;
+  bottom:7px;
+  margin:0;
+  padding:4px 2px 0;
+  border:0;
+  background:transparent;
   display:block;
+  overflow:hidden;
+  color:#e3c15a;
 }
 
 .air-module .radar-side-data .air-alert span{
   display:block;
-  margin-bottom:5px;
-  color:var(--amber);
-  opacity:1;
-  font-size:9px;
-  line-height:1;
+  margin:0 0 3px;
+  color:#e6c55d;
+  transform:none;
+  font:800 8px/.95 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.04em;
 }
+
+.air-module .radar-side-data .air-alert span::before{content:"[MESSAGE LIST 1/3]"}
+.air-module .radar-side-data .air-alert span{font-size:0}
+.air-module .radar-side-data .air-alert span::before{font-size:8px}
 
 .air-module .radar-side-data .air-alert strong{
   display:block;
+  position:relative;
+  width:100%;
+  min-height:42px;
   color:#e3c15a;
-  font-size:10px;
-  line-height:1.12;
+  font-size:0;
   text-align:left;
   white-space:normal;
 }
 
 .air-module .radar-side-data .air-alert strong::after{
-  content:"\A SECTOR 4A\A BRG 176 / RNG 4.2";
+  content:"1  CORRIDOR TRACK\A   BRG 176  RNG 4.2NM\A   CPA 3.1NM  TUP 35:57";
+  display:block;
+  width:0;
+  overflow:hidden;
   white-space:pre;
+  color:#e3c15a;
+  font:800 7.5px/1.15 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  letter-spacing:-.045em;
+  animation:airMessageType 27s steps(42,end) infinite;
 }
 
-.air-module .radar-legend{
-  gap:22px;
-  font-weight:700;
-}
-
+.air-module .radar-legend{gap:22px;font-weight:700}
 .air-module .radar-legend .friendly,
 .air-module .radar-legend .neutral,
-.air-module .radar-legend .unknown{
-  color:var(--green);
-  opacity:.82;
-}
+.air-module .radar-legend .unknown{color:var(--green);opacity:.82}
+.air-module .radar-legend .tracked-key{color:#a6ec7d;opacity:1}
 
-.air-module .radar-legend .tracked-key{
-  color:#a6ec7d;
-  opacity:1;
-}
-
-/* Primitive, accumulated instrument readouts clustered around the upper-left
-   edge of the radar. Deliberately uneven widths and spacing echo older
-   operational displays without turning the whole panel into a period piece. */
+/* Primitive, accumulated instrument readouts clustered around the upper-left. */
 .air-module::before,
 .air-module::after,
 .air-module .radar-module-body::before,
@@ -348,50 +270,16 @@
   text-shadow:0 0 3px rgba(119,201,91,.16);
 }
 
-.air-module::before{
-  content:"12      NW\A        072";
-  top:50px;
-  left:20px;
-  width:70px;
-  height:31px;
-  padding:4px 5px 2px;
-}
-
-.air-module::after{
-  content:"DISPLAY\A RADAR";
-  top:50px;
-  left:95px;
-  width:64px;
-  height:31px;
-  padding:4px 5px 2px;
-}
-
+.air-module::before{content:"12      NW\A        072";top:50px;left:20px;width:70px;height:31px;padding:4px 5px 2px}
+.air-module::after{content:"DISPLAY\A RADAR";top:50px;left:95px;width:64px;height:31px;padding:4px 5px 2px}
 .air-module .radar-module-body::before{
   content:"MENU UP  M\A ANT 1  S-BAND";
-  left:8px;
-  top:42px;
-  width:100px;
-  height:38px;
-  padding:4px 5px 3px;
-  background:
-    linear-gradient(to bottom,transparent 18px,rgba(119,201,91,.88) 18px,rgba(119,201,91,.88) 20px,transparent 20px),
-    #020402;
+  left:8px;top:42px;width:100px;height:38px;padding:4px 5px 3px;
+  background:linear-gradient(to bottom,transparent 18px,rgba(119,201,91,.88) 18px,rgba(119,201,91,.88) 20px,transparent 20px),#020402;
 }
+.air-module .radar-module-body::after{content:"PULSE  L\A PICTURE  2T";left:8px;top:84px;width:79px;height:36px;padding:4px 5px 3px}
 
-.air-module .radar-module-body::after{
-  content:"PULSE  L\A PICTURE  2T";
-  left:8px;
-  top:84px;
-  width:79px;
-  height:36px;
-  padding:4px 5px 3px;
-}
-
-@keyframes airTrackMove{
-  from{transform:translate(0,0)}
-  to{transform:translate(var(--dx),var(--dy))}
-}
-
+@keyframes airTrackMove{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
 @keyframes airContactPulse{
   0%,8%{opacity:var(--peak-opacity)}
   32%{opacity:.84}
@@ -401,9 +289,28 @@
   100%{opacity:var(--peak-opacity)}
 }
 
-@media (prefers-reduced-motion:reduce){
-  .air-contact{
-    animation:none;
-    opacity:var(--peak-opacity);
+@keyframes airMessageType{
+  0%,3%{
+    content:"1  CORRIDOR TRACK\A   BRG 176  RNG 4.2NM\A   CPA 3.1NM  TUP 35:57";
+    width:0;
   }
+  14%,28%{width:100%}
+  31%{width:0}
+  34%{
+    content:"2  TRACK UPDATE\A   T03 CORRELATED\A   ALT FL080  TRK 247";
+    width:0;
+  }
+  46%,61%{width:100%}
+  64%{width:0}
+  67%{
+    content:"3  SENSOR NOTICE\A   COAST N42 AGE 01.2\A   AUTO REACQ ENABLED";
+    width:0;
+  }
+  80%,96%{width:100%}
+  100%{width:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .air-contact{animation:none;opacity:var(--peak-opacity)}
+  .air-module .radar-side-data .air-alert strong::after{animation:none;width:100%}
 }
