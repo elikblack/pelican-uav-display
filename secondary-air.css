@@ -70,19 +70,23 @@
 }
 
 .air-contact{
+  --dx:16px;
+  --dy:-10px;
+  --move-time:30s;
+  --move-delay:0s;
+  --pulse-time:4.2s;
+  --pulse-delay:0s;
+  --peak-opacity:.96;
+  --low-opacity:.34;
   fill:none;
   stroke:var(--green);
   stroke-width:1.2;
   vector-effect:non-scaling-stroke;
-  animation:airContactLive 6.4s steps(1,end) infinite;
-}
-
-.air-contact-wrap.drift-a .air-contact{
-  animation:airContactLive 6.4s steps(1,end) infinite,airDriftA 13s ease-in-out infinite alternate;
-}
-
-.air-contact-wrap.drift-b .air-contact{
-  animation:airContactLive 6.4s steps(1,end) infinite,airDriftB 16s ease-in-out infinite alternate;
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:
+    airTrackMove var(--move-time) linear var(--move-delay) infinite alternate,
+    airContactPulse var(--pulse-time) ease-out var(--pulse-delay) infinite;
 }
 
 .air-contact .air-symbol{
@@ -116,6 +120,8 @@
 }
 
 .air-contact.tracked{
+  --peak-opacity:1;
+  --low-opacity:.5;
   color:#a6ec7d;
 }
 
@@ -128,15 +134,72 @@
 }
 
 .air-contact.coast{
-  opacity:.62;
+  --peak-opacity:.72;
+  --low-opacity:.16;
 }
 
-.air-contact.contact-b{animation-delay:-2.1s}
-.air-contact.contact-c{animation-delay:-4.8s}
-.air-contact.contact-d{animation-delay:-1.2s}
-.air-contact.contact-e{animation-delay:-3.5s}
-.air-contact.contact-f{animation-delay:-5.6s}
-.air-contact.contact-g{animation-delay:-.4s}
+.air-contact.contact-a{
+  --dx:22px;
+  --dy:-12px;
+  --move-time:29s;
+  --move-delay:-8s;
+  --pulse-time:4.1s;
+  --pulse-delay:-.7s;
+}
+
+.air-contact.contact-b{
+  --dx:16px;
+  --dy:12px;
+  --move-time:31s;
+  --move-delay:-19s;
+  --pulse-time:4.7s;
+  --pulse-delay:-2.1s;
+}
+
+.air-contact.contact-c{
+  --dx:24px;
+  --dy:-14px;
+  --move-time:35s;
+  --move-delay:-13s;
+  --pulse-time:3.8s;
+  --pulse-delay:-3s;
+}
+
+.air-contact.contact-d{
+  --dx:18px;
+  --dy:-12px;
+  --move-time:33s;
+  --move-delay:-25s;
+  --pulse-time:4.4s;
+  --pulse-delay:-1.2s;
+}
+
+.air-contact.contact-e{
+  --dx:-12px;
+  --dy:-18px;
+  --move-time:28s;
+  --move-delay:-5s;
+  --pulse-time:5s;
+  --pulse-delay:-3.5s;
+}
+
+.air-contact.contact-f{
+  --dx:22px;
+  --dy:5px;
+  --move-time:37s;
+  --move-delay:-31s;
+  --pulse-time:3.6s;
+  --pulse-delay:-2.8s;
+}
+
+.air-contact.contact-g{
+  --dx:-16px;
+  --dy:12px;
+  --move-time:30s;
+  --move-delay:-14s;
+  --pulse-time:4.9s;
+  --pulse-delay:-.4s;
+}
 
 .air-module .radar-side-data{
   height:88%;
@@ -172,23 +235,23 @@
   opacity:1;
 }
 
-@keyframes airContactLive{
-  0%,86%,100%{opacity:.9}
-  88%{opacity:.36}
-  91%{opacity:1}
-  94%{opacity:.68}
+@keyframes airTrackMove{
+  from{transform:translate(0,0)}
+  to{transform:translate(var(--dx),var(--dy))}
 }
 
-@keyframes airDriftA{
-  from{transform:translate(0,0)}
-  to{transform:translate(2px,-1px)}
-}
-
-@keyframes airDriftB{
-  from{transform:translate(0,0)}
-  to{transform:translate(-1px,2px)}
+@keyframes airContactPulse{
+  0%,7%{opacity:var(--peak-opacity)}
+  28%{opacity:.72}
+  68%{opacity:var(--low-opacity)}
+  84%{opacity:var(--low-opacity)}
+  94%{opacity:.62}
+  100%{opacity:var(--peak-opacity)}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .air-contact{animation:none}
+  .air-contact{
+    animation:none;
+    opacity:var(--peak-opacity);
+  }
 }
