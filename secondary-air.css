@@ -213,10 +213,12 @@
 /* Position strip. Coordinates remain intentionally synthetic. */
 .air-module .radar-side-data::before{
   content:"GS POSN";
+  order:5;
   display:flex;
   align-items:flex-start;
   box-sizing:border-box;
   height:35px;
+  flex:0 0 35px;
   margin:1px -5px 0;
   padding:4px 5px 0;
   border-top:2px solid rgba(119,201,91,.92);
@@ -320,8 +322,12 @@
 .air-module::after{content:"DISPLAY\A RADAR";top:50px;left:95px;width:64px;height:31px;padding:4px 5px 2px}
 .air-module .radar-module-body::before{
   content:"MENU UP  M\A ANT 1  S-BAND";
-  left:8px;top:42px;width:100px;height:38px;padding:4px 5px 3px;
-  background:linear-gradient(to bottom,transparent 18px,rgba(119,201,91,.88) 18px,rgba(119,201,91,.88) 20px,transparent 20px),#020402;
+  left:8px;
+  top:42px;
+  width:100px;
+  height:38px;
+  padding:4px 5px 3px;
+  background:#020402;
 }
 .air-module .radar-module-body::after{content:"PULSE  L\A PICTURE  2T";left:8px;top:84px;width:79px;height:36px;padding:4px 5px 3px}
 
