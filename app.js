@@ -4,6 +4,7 @@
 
   const root = document.documentElement;
   const display = document.getElementById("primary-display");
+  const workspace = document.querySelector(".workspace");
   const mapWorld = document.getElementById("map-world");
   const mapSvg = document.getElementById("map-svg");
   const terrain = document.getElementById("terrain-image");
@@ -20,6 +21,11 @@
   let pausedAt = 0;
   let routeLength = 1;
   let waypointMeta = [];
+
+  const sparkCount = 52;
+  const sparkStepMs = 95;
+  const sparkSamples = [];
+  let sparkLastStep = 0;
 
   function applyTheme() {
     Object.entries(cfg.theme).forEach(([key, value]) => {
@@ -65,6 +71,14 @@
     mapSvg.setAttribute("viewBox", `0 0 ${w} ${h}`);
     mapSvg.setAttribute("width", w);
     mapSvg.setAttribute("height", h);
+
+    if (workspace) {
+      workspace.style.setProperty("--map-image", `url("${cfg.map.image}")`);
+      workspace.style.setProperty("--map-width", `${w}px`);
+      workspace.style.setProperty("--map-height", `${h}px`);
+      workspace.style.setProperty("--map-x", `${cfg.map.startX}px`);
+      workspace.style.setProperty("--map-y", `${cfg.map.startY}px`);
+    }
 
     const points = cfg.route.waypoints;
     const pathData = points.map((p, i) => `${i ? "L" : "M"} ${p.x} ${p.y}`).join(" ");
@@ -138,6 +152,10 @@
     const x = cfg.map.startX + (cfg.map.endX - cfg.map.startX) * ease;
     const y = cfg.map.startY + (cfg.map.endY - cfg.map.startY) * ease;
     mapWorld.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    if (workspace) {
+      workspace.style.setProperty("--map-x", `${x}px`);
+      workspace.style.setProperty("--map-y", `${y}px`);
+    }
 
     progressText.textContent = `${String(Math.round(progress * 100)).padStart(2, "0")}%`;
     updateWaypointState(progress);
@@ -153,16 +171,38 @@
     requestAnimationFrame(animationFrame);
   }
 
+  function throughputSample(timeMs) {
+    const t = timeMs / 1000;
+    const carrier = 5.1 * Math.sin(t * 2.25);
+    const ripple = 2.8 * Math.sin(t * 6.7 + 0.8);
+    const fine = 1.5 * Math.sin(t * 15.1 + 2.1);
+    const burst = 3.2 * Math.pow(Math.max(0, Math.sin(t * 0.72 + 1.4)), 7);
+    return Math.max(7, Math.min(41, 24 + carrier + ripple + fine - burst));
+  }
+
   function animateSparkline(now) {
     if (!sparkPath) return;
-    const points = [];
-    const count = 28;
-    const t = now / 650;
-    for (let i = 0; i < count; i++) {
-      const x = i * 170 / (count - 1);
-      const wave = 24 + 6 * Math.sin(t + i * .7) + 4 * Math.sin(t * .43 + i * 1.8);
-      points.push(`${x.toFixed(1)},${Math.max(6, Math.min(42, wave)).toFixed(1)}`);
+
+    if (!sparkSamples.length) {
+      for (let i = sparkCount - 1; i >= 0; i--) {
+        sparkSamples.push(throughputSample(now - i * sparkStepMs));
+      }
+      sparkLastStep = now;
     }
+
+    while (now - sparkLastStep >= sparkStepMs) {
+      sparkLastStep += sparkStepMs;
+      sparkSamples.push(throughputSample(sparkLastStep));
+      if (sparkSamples.length > sparkCount) sparkSamples.shift();
+    }
+
+    const fractionalScroll = Math.max(0, Math.min(1, (now - sparkLastStep) / sparkStepMs));
+    const dx = 170 / (sparkCount - 2);
+    const points = sparkSamples.map((value, i) => {
+      const x = i * dx - dx * fractionalScroll;
+      return `${x.toFixed(2)},${value.toFixed(2)}`;
+    });
+
     sparkPath.setAttribute("d", `M ${points.join(" L ")}`);
     requestAnimationFrame(animateSparkline);
   }
