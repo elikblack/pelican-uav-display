@@ -1,0 +1,57 @@
+.secondary-tab{
+  border:2px solid var(--line-soft);
+  clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px);
+  background:transparent;
+  opacity:.72;
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease,opacity .16s ease;
+}
+
+.secondary-tab.active{
+  color:#010201;
+  opacity:1;
+  border-color:var(--green);
+  border-bottom-color:var(--green);
+  background:var(--green);
+  box-shadow:none;
+}
+
+.secondary-tab.active:after{
+  content:none;
+}
+
+.secondary-tab:not(.active):hover{
+  opacity:.9;
+  border-color:rgba(119,201,91,.7);
+  background:rgba(119,201,91,.045);
+}
+
+.settings-tab svg{
+  width:27px;
+  height:27px;
+  fill:currentColor;
+  stroke:currentColor;
+  stroke-width:1.35;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.settings-tab svg circle{
+  fill:#010201;
+  stroke:currentColor;
+  stroke-width:1.4;
+}
+
+.settings-tab.active svg circle{
+  fill:var(--green);
+  stroke:#010201;
+}
+
+.secondary-tab[data-tab="maintenance"]::before{
+  z-index:3;
+}
+
+.secondary-tab[data-tab="maintenance"].active::before{
+  color:#5b3f00;
+  border-color:#5b3f00;
+  background:rgba(255,215,90,.55);
+}
