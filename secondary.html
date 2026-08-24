@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelican UAV Display — Secondary</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="screen-fit">
+    <main id="secondary-display" class="display secondary-shell" aria-label="Secondary 8.8-inch display">
+      <header class="topbar" style="height:64px;grid-template-columns:360px 1fr 165px">
+        <div class="brand-block">
+          <div class="brand-title">SYSTEMS / PAYLOAD</div>
+          <div class="brand-subtitle">SECONDARY DISPLAY / 1920×480</div>
+        </div>
+        <div class="status-ribbon">
+          <div class="status-chip good">SYSTEM READY</div>
+          <div class="status-chip good">LINK GOOD</div>
+          <div class="status-chip amber">STANDBY</div>
+        </div>
+        <div class="clock-block"><div id="secondary-clock">--:--:--</div><div>LOCAL</div></div>
+      </header>
+      <section class="secondary-content">
+        <div>
+          8.8-INCH DISPLAY — NEXT PASS
+          <div class="secondary-note">Shared visual language is in place; content/layout intentionally left open for the next design step.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="secondary.js"></script>
+</body>
+</html>
