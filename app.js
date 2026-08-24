@@ -13,7 +13,7 @@
   const aircraft = document.getElementById("aircraft");
   const waypointList = document.getElementById("waypoint-list");
   const progressText = document.getElementById("route-progress");
-  const spark = document.getElementById("datalink-spark");
+  const sparkPath = document.getElementById("spark-path");
 
   let running = true;
   let loopStarted = performance.now();
@@ -37,13 +37,17 @@
 
   function buildPanel(key) {
     const panel = cfg.panels[key];
+    if (!panel) return;
     const title = document.querySelector(`[data-panel-title="${key}"]`);
     const rows = document.querySelector(`[data-panel-rows="${key}"]`);
     if (title) title.textContent = panel.title;
     if (!rows) return;
-    rows.innerHTML = panel.rows.map(([name, state]) =>
-      `<div class="status-row"><span>${name}</span><span>${state}</span></div>`
-    ).join("");
+    rows.innerHTML = panel.rows.map(([name, state, tone = ""]) => `
+      <div class="status-row">
+        <span class="row-symbol" aria-hidden="true"></span>
+        <span class="row-name">${name}</span>
+        <span class="row-state ${tone}">${state}</span>
+      </div>`).join("");
   }
 
   function fitDisplay() {
@@ -69,30 +73,30 @@
 
     waypointLayer.innerHTML = points.map((p, index) => `
       <g class="waypoint" data-waypoint="${index}" transform="translate(${p.x} ${p.y})">
-        <circle r="13"></circle>
-        <text x="21" y="-18">${p.id}</text>
+        <circle r="12"></circle>
+        <text x="20" y="-17">${p.id}</text>
       </g>`).join("");
 
     waypointList.innerHTML = points.map((p, index) => `
       <div class="waypoint-item" data-waypoint-list="${index}">
+        <span class="wp-dot"></span>
         <span class="wp-id">${p.id}</span>
-        <span class="wp-label">${p.label}</span>
-        <span class="wp-state">QUEUED</span>
+        <span class="wp-label">${p.label || ""}</span>
       </div>`).join("");
 
     requestAnimationFrame(() => {
       routeLength = Math.max(1, routeBase.getTotalLength());
       routeProgress.style.strokeDasharray = `${routeLength}`;
       routeProgress.style.strokeDashoffset = `${routeLength}`;
-      waypointMeta = points.map(p => ({...p, progress: nearestProgressOnPath(p)}));
-      waypointMeta.sort((a,b) => a.progress - b.progress);
+      waypointMeta = points.map(p => ({ ...p, progress: nearestProgressOnPath(p) }));
+      updateRoute(0);
     });
   }
 
   function nearestProgressOnPath(point) {
     let bestLength = 0;
     let bestDistance = Infinity;
-    const samples = 350;
+    const samples = 400;
     for (let i = 0; i <= samples; i++) {
       const length = routeLength * i / samples;
       const p = routeBase.getPointAtLength(length);
@@ -108,24 +112,13 @@
   function updateWaypointState(progress) {
     const listItems = [...document.querySelectorAll("[data-waypoint-list]")];
     const mapItems = [...document.querySelectorAll("#waypoint-layer .waypoint")];
-    const nextIndex = waypointMeta.findIndex(wp => progress <= wp.progress + 0.015);
+    const nextIndex = waypointMeta.findIndex(wp => progress <= wp.progress + 0.012);
     const activeIndex = nextIndex === -1 ? waypointMeta.length - 1 : nextIndex;
 
     listItems.forEach((item, index) => {
-      item.classList.remove("active", "completed");
-      const state = item.querySelector(".wp-state");
-      const wpProgress = waypointMeta[index]?.progress ?? 1;
-      if (index < activeIndex || progress > wpProgress + 0.018) {
-        item.classList.add("completed");
-        state.textContent = "DONE";
-      } else if (index === activeIndex) {
-        item.classList.add("active");
-        state.textContent = "ACTIVE";
-      } else {
-        state.textContent = "QUEUED";
-      }
+      item.classList.toggle("active", index === activeIndex);
+      item.classList.toggle("completed", index < activeIndex);
     });
-
     mapItems.forEach((item, index) => {
       item.classList.toggle("active", index === activeIndex);
       item.classList.toggle("completed", index < activeIndex);
@@ -137,7 +130,7 @@
     routeProgress.style.strokeDashoffset = `${routeLength - length}`;
 
     const p = routeBase.getPointAtLength(length);
-    const p2 = routeBase.getPointAtLength(Math.min(routeLength, length + 3));
+    const p2 = routeBase.getPointAtLength(Math.min(routeLength, length + 4));
     const angle = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI + 90;
     aircraft.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle})`);
 
@@ -160,25 +153,18 @@
     requestAnimationFrame(animationFrame);
   }
 
-  function buildSparkline() {
-    spark.innerHTML = Array.from({length:24}, () => "<i></i>").join("");
-    const bars = [...spark.children];
-    const tick = now => {
-      const t = now / 420;
-      bars.forEach((bar, i) => {
-        const wave = 38 + 24 * Math.sin(t + i * .55) + 12 * Math.sin(t * .37 + i * 1.31);
-        bar.style.height = `${Math.max(10, Math.min(94, wave))}%`;
-      });
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-
-  function updateClock() {
-    const now = new Date();
-    document.getElementById("clock").textContent = now.toLocaleTimeString([], {
-      hour12:false, hour:"2-digit", minute:"2-digit", second:"2-digit"
-    });
+  function animateSparkline(now) {
+    if (!sparkPath) return;
+    const points = [];
+    const count = 28;
+    const t = now / 650;
+    for (let i = 0; i < count; i++) {
+      const x = i * 170 / (count - 1);
+      const wave = 24 + 6 * Math.sin(t + i * .7) + 4 * Math.sin(t * .43 + i * 1.8);
+      points.push(`${x.toFixed(1)},${Math.max(6, Math.min(42, wave)).toFixed(1)}`);
+    }
+    sparkPath.setAttribute("d", `M ${points.join(" L ")}`);
+    requestAnimationFrame(animateSparkline);
   }
 
   function restart() {
@@ -199,18 +185,16 @@
   function init() {
     applyTheme();
     bindText();
-    ["platform", "sensors", "payload", "datalink"].forEach(buildPanel);
+    ["platform", "sensors", "payload"].forEach(buildPanel);
     buildMap();
-    buildSparkline();
     fitDisplay();
-    updateClock();
-    setInterval(updateClock, 1000);
     window.addEventListener("resize", fitDisplay);
     window.addEventListener("keydown", event => {
       if (event.code === "Space") { event.preventDefault(); togglePause(); }
       if (event.key.toLowerCase() === "r") restart();
     });
     requestAnimationFrame(animationFrame);
+    requestAnimationFrame(animateSparkline);
   }
 
   init();
