@@ -3,11 +3,12 @@ window.DISPLAY_CONFIG = {
 
   theme: {
     background: "#010301",
-    panel: "rgba(2, 8, 4, 0.97)",
-    panelSoft: "rgba(4, 13, 7, 0.88)",
+    panel: "rgba(2, 8, 4, 0.78)",
+    panelSoft: "rgba(4, 13, 7, 0.72)",
     green: "#77c95b",
     greenDim: "#345f30",
     cyan: "#63d2d8",
+    signalBlue: "#4fa7ff",
     amber: "#d7aa35",
     red: "#d95750",
     text: "#b3caaa",
@@ -80,8 +81,8 @@ window.DISPLAY_CONFIG = {
   },
 
   animation: {
-    loopMs: 18000,
-    pauseAtEndMs: 1400,
+    loopMs: 36000,
+    pauseAtEndMs: 2800,
     waypointPulseMs: 650
   },
 
