@@ -31,6 +31,36 @@
     `;
   }
 
+  function startWeatherFrameAnimation() {
+    const weatherBody = document.querySelector('.weather-sector-body');
+    const weatherSvg = weatherBody && weatherBody.querySelector('.weather-sector');
+    if (!weatherBody || !weatherSvg) return;
+
+    const frames = Array.from({ length: 10 }, (_, index) =>
+      `assets/weather-radar-frame-${String(index + 1).padStart(2, '0')}.png`
+    );
+
+    frames.forEach(src => {
+      const preload = new Image();
+      preload.src = src;
+    });
+
+    const frame = document.createElement('img');
+    frame.className = 'weather-frame-layer';
+    frame.alt = '';
+    frame.setAttribute('aria-hidden', 'true');
+    frame.src = frames[0];
+    weatherBody.insertBefore(frame, weatherSvg);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let frameIndex = 0;
+    setInterval(() => {
+      frameIndex = (frameIndex + 1) % frames.length;
+      frame.src = frames[frameIndex];
+    }, 330);
+  }
+
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(item => item.classList.remove('active'));
@@ -123,6 +153,7 @@
   }
 
   curveWeatherHeadingScale();
+  startWeatherFrameAnimation();
   fitDisplay();
   updateTelemetry();
   tickUptime();
