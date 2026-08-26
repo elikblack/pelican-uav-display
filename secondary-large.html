@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelican UAV Display — Secondary Large Text</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#010201}
+    #secondary-large-frame{display:block;width:100%;height:100%;border:0;background:#010201}
+  </style>
+</head>
+<body>
+  <iframe id="secondary-large-frame" src="secondary.html" title="Secondary display large-text experiment"></iframe>
+  <script>
+    (() => {
+      const frame = document.getElementById('secondary-large-frame');
+      frame.addEventListener('load', () => {
+        const doc = frame.contentDocument;
+        if (!doc || doc.querySelector('link[href="secondary-large.css"]')) return;
+        const stylesheet = doc.createElement('link');
+        stylesheet.rel = 'stylesheet';
+        stylesheet.href = 'secondary-large.css';
+        doc.head.appendChild(stylesheet);
+      });
+    })();
+  </script>
+</body>
+</html>
