@@ -206,17 +206,22 @@
 .secondary-tabs{
   height:96px!important;
   padding:12px 24px 0!important;
-  grid-template-columns:repeat(6,minmax(0,1fr)) 96px!important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) 96px!important;
   gap:12px!important;
-  border-bottom-width:2px!important;
+  border-bottom-width:4px!important;
+  border-bottom-color:var(--green)!important;
 }
+
+/* SYSTEMS disappears in this hardware revision, giving the remaining operator
+   modes enough width to keep their large labels intact. */
+.secondary-tab[data-tab="systems"]{display:none!important}
 
 .secondary-tab{
   height:72px!important;
   padding-left:30px!important;
   padding-right:18px!important;
   font-size:35px!important;
-  transform:translateY(4px)!important;
+  transform:translateY(0)!important;
 }
 
 /* The tab outline is made from its green outer shape and dark inset. Doubling
@@ -226,7 +231,9 @@
   clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px)!important;
 }
 
-.secondary-tab.active{transform:translateY(0)!important}
+/* Inactive tabs sit slightly proud of the rail. The selected tab drops down
+   exactly far enough for its bottom edge to meet the 4px structural baseline. */
+.secondary-tab.active{transform:translateY(8px)!important}
 
 .secondary-tab[data-tab="maintenance"]{padding-left:74px!important}
 .secondary-tab[data-tab="maintenance"]::before{
@@ -247,4 +254,20 @@
    lighter weight, giving the interface the layered-in-over-time character. */
 .secondary-module{
   border-width:2px!important;
+}
+
+/* Status retrofit: later operators dropped two low-value always-on fields and
+   used the reclaimed space to make the remaining four primary cards easier to
+   read at a glance. The source markup stays intact for the original display. */
+.status-cards .status-card:nth-child(3),
+.status-cards .status-card:nth-child(6){display:none!important}
+.status-card{
+  height:80px!important;
+  padding-top:9px!important;
+  padding-bottom:10px!important;
+}
+.status-cards{
+  padding-top:12px!important;
+  padding-bottom:7px!important;
+  column-gap:18px!important;
 }
