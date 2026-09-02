@@ -1,62 +1,197 @@
-/* Experimental secondary-display typography pass.
-   Intentionally doubles text only. Layout dimensions are left unchanged so
-   crowding/overflow is visible and can inform the next design pass. */
+/* Experimental large-format secondary display.
+   This pass keeps the readability gains from the literal 2x experiment, but
+   treats the interface as field-evolved equipment: primary values get large,
+   supporting labels stay compact, and awkward local exceptions are allowed. */
 
-/* Top navigation */
-.secondary-tab{font-size:28px!important}
-.secondary-tab[data-tab="maintenance"]::before{font-size:18px!important}
+/* Top navigation: intentionally oversized, but still one-line instrument tabs. */
+.secondary-tab{
+  font-size:23px!important;
+  letter-spacing:.035em!important;
+  padding-left:20px!important;
+  padding-right:12px!important;
+}
+.secondary-tab[data-tab="maintenance"]{padding-left:50px!important}
+.secondary-tab[data-tab="maintenance"]::before{
+  width:22px!important;
+  min-width:22px!important;
+  height:20px!important;
+  font-size:14px!important;
+}
 
-/* Module titles */
-.module-heading{font-size:28px!important}
+/* Module titles should read from across the bench. */
+.module-heading{
+  font-size:24px!important;
+  letter-spacing:.045em!important;
+}
 
-/* Legacy radar text, retained for completeness during load */
-.cardinals text{font-size:24px!important}
-.radar-contact text{font-size:20px!important}
+/* Legacy radar text, retained for completeness during load. */
+.cardinals text{font-size:20px!important}
+.radar-contact text{font-size:17px!important}
 .radar-side-data span,
 .status-card span,
 .status-summary span,
 .trend-heading span,
-.weather-alert span{font-size:20px!important}
-.radar-side-data strong{font-size:24px!important}
-.radar-legend{font-size:20px!important}
+.weather-alert span{font-size:17px!important}
+.radar-side-data strong{font-size:22px!important}
+.radar-legend{font-size:16px!important}
 
-/* Ground station status */
-.status-card strong{font-size:26px!important}
-.trend-heading strong{font-size:22px!important}
-.status-summary strong{font-size:22px!important}
-.weather-alert strong{font-size:20px!important}
-.alert-icon{font-size:52px!important}
+/* Ground-station status. Labels remain subordinate to the numbers. */
+.status-card span,
+.status-summary span,
+.trend-heading span{font-size:16px!important;line-height:1!important}
+.status-card strong{font-size:25px!important;line-height:.95!important}
+.trend-heading strong{font-size:20px!important}
+.status-summary strong{font-size:20px!important}
+.status-card{padding-top:5px!important;padding-bottom:7px!important}
+.status-summary>div{gap:1px!important}
 
-/* Tactical airspace plot */
-.air-geo-label{font-size:20px!important}
-.air-zone-label{font-size:18px!important}
-.air-contact .air-readout{font-size:19px!important}
-.air-contact .air-readout.dim{font-size:17px!important}
+/* Let the lower status block consume its space rather than spilling through it. */
+.status-lower{padding-top:5px!important}
+.trend-heading{height:22px!important}
 
-/* Crowded right-side instrument readout */
-.air-module .radar-side-data>div:not(.air-alert)>span::after{font-size:12.4px!important}
-.air-module .radar-side-data>div:nth-child(1)>strong::after{font-size:52px!important}
-.air-module .radar-side-data>div:nth-child(2)>strong::after{font-size:60px!important}
-.air-module .radar-side-data>div:nth-child(3)>strong::after{font-size:50px!important}
-.air-module .radar-side-data>div:nth-child(4)>strong::after{font-size:56px!important}
-.air-module .radar-side-data>div:nth-child(2)>strong::before{font-size:12px!important}
-.air-module .radar-side-data>div:nth-child(2)::before{font-size:11.6px!important}
-.air-module .radar-side-data>div:nth-child(2)::after{font-size:18px!important}
-.air-module .radar-side-data::before{font-size:13px!important}
-.air-module .radar-side-data::after{font-size:17px!important}
+/* Tactical airspace plot. Geometry labels are deliberately more restrained
+   than contact information, as if they survived from an earlier software rev. */
+.air-geo-label{font-size:16px!important}
+.air-zone-label{font-size:14px!important}
+.air-contact .air-readout{font-size:17px!important}
+.air-contact .air-readout.dim{font-size:15px!important}
 
-/* Rolling amber message feed, including JS inline font declarations */
-.air-module .radar-side-data .air-alert>b{font-size:16px!important}
-.air-message-entry{font-size:15px!important}
+/* Readability retrofit: later hardware revision widened the target-data rail
+   rather than shrinking its primary values back down. */
+.air-module .radar-module-body{
+  grid-template-columns:minmax(0,1fr) 244px!important;
+  gap:8px!important;
+}
 
-/* Primitive radar-edge cruft */
+.air-module .radar-side-data{
+  padding:5px 7px 6px!important;
+}
+
+.air-module .radar-side-data>div:not(.air-alert){
+  grid-template-columns:38px 1fr!important;
+  gap:3px!important;
+}
+.air-module .radar-side-data>div:nth-child(1){height:43px!important}
+.air-module .radar-side-data>div:nth-child(2){height:48px!important;margin-top:-2px!important}
+.air-module .radar-side-data>div:nth-child(3){height:44px!important;margin-top:8px!important}
+.air-module .radar-side-data>div:nth-child(4){height:44px!important;margin-top:-2px!important}
+
+/* Small boxed legends stay genuinely small. */
+.air-module .radar-side-data>div:not(.air-alert)>span::after{
+  min-width:30px!important;
+  min-height:18px!important;
+  font-size:10px!important;
+  line-height:.82!important;
+}
+
+/* Primary instrument values: large, angular, and intentionally inconsistent. */
+.air-module .radar-side-data>div:nth-child(1)>strong::after{font-size:41px!important}
+.air-module .radar-side-data>div:nth-child(2)>strong::after{font-size:47px!important}
+.air-module .radar-side-data>div:nth-child(3)>strong::after{font-size:39px!important}
+.air-module .radar-side-data>div:nth-child(4)>strong::after{font-size:43px!important}
+
+/* Later-added wind/drift annotations retain a different scale and rhythm. */
+.air-module .radar-side-data>div:nth-child(2)>strong{padding-right:31px!important}
+.air-module .radar-side-data>div:nth-child(2)>strong::before{
+  right:0!important;
+  top:6px!important;
+  font-size:10px!important;
+  line-height:.85!important;
+}
+.air-module .radar-side-data>div:nth-child(2)::before{
+  left:39px!important;
+  bottom:-8px!important;
+  font-size:9px!important;
+}
+.air-module .radar-side-data>div:nth-child(2)::after{
+  right:30px!important;
+  bottom:-10px!important;
+  font-size:15px!important;
+}
+
+/* Position strip was evidently added after the four core motion fields. */
+.air-module .radar-side-data::before{
+  height:43px!important;
+  flex-basis:43px!important;
+  margin-left:-7px!important;
+  margin-right:-7px!important;
+  padding:5px 7px 0!important;
+  font-size:11px!important;
+}
+.air-module .radar-side-data::after{
+  right:8px!important;
+  top:190px!important;
+  font-size:14px!important;
+  line-height:1.05!important;
+}
+
+/* Rolling amber message list. Larger than the original, but still the dense
+   printer-tape layer rather than another primary readout. */
+.air-module .radar-side-data .air-alert{
+  left:9px!important;
+  right:9px!important;
+  top:236px!important;
+  bottom:6px!important;
+  padding-top:4px!important;
+}
+.air-module .radar-side-data .air-alert>b{font-size:12px!important;line-height:.95!important}
+.air-message-entry{font-size:11.5px!important;line-height:1.08!important;margin-bottom:4px!important}
+
+/* Radar legend is readable but remains subordinate to the plot. */
+.air-module .radar-legend{font-size:15px!important;gap:18px!important}
+
+/* Primitive radar-edge cruft. Do not regularize these: each feels like a
+   separate firmware addition, but their boxes now actually contain the text. */
 .air-module::before,
 .air-module::after,
 .air-module .radar-module-body::before,
-.air-module .radar-module-body::after{font-size:16px!important}
+.air-module .radar-module-body::after{
+  font-size:12px!important;
+  line-height:.95!important;
+}
+.air-module::before{
+  width:84px!important;
+  height:38px!important;
+  padding:5px 6px 3px!important;
+}
+.air-module::after{
+  left:109px!important;
+  width:78px!important;
+  height:38px!important;
+  padding:5px 6px 3px!important;
+}
+.air-module .radar-module-body::before{
+  width:126px!important;
+  height:44px!important;
+  padding:5px 6px 3px!important;
+}
+.air-module .radar-module-body::after{
+  top:91px!important;
+  width:100px!important;
+  height:42px!important;
+  padding:5px 6px 3px!important;
+}
 
-/* Weather radar */
-.wx-heading-scale text{font-size:22px!important}
-.wx-range-labels text{font-size:20px!important}
-.weather-legend-greeble{font-size:18px!important}
-.wx-mode strong{font-size:18px!important}
+/* Weather radar: navigation scale is prominent; mode/legend text is compact. */
+.wx-heading-scale text{font-size:19px!important}
+.wx-range-labels text{font-size:17px!important}
+.weather-legend-greeble{
+  min-width:330px!important;
+  font-size:14px!important;
+  line-height:1!important;
+  padding:6px 8px!important;
+}
+.wx-mode,
+.wx-intensity{min-height:18px!important}
+.wx-mode strong{font-size:14px!important}
+.wx-swatch{width:22px!important;height:9px!important}
+
+/* Bottom weather advisory was one of the literal-2x overflow points. Give it
+   a little more physical height while keeping the alert icon emphatic. */
+.weather-alert{
+  height:62px!important;
+  grid-template-columns:46px 1fr 100px!important;
+}
+.weather-alert span{font-size:15px!important;line-height:1!important}
+.weather-alert strong{font-size:16px!important;line-height:1!important}
+.alert-icon{font-size:38px!important}
