@@ -6,7 +6,9 @@
   <title>Pelican UAV Display — Secondary Preflight</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="secondary.css">
+  <link rel="stylesheet" href="secondary-tabs.css">
   <link rel="stylesheet" href="secondary-weather.css">
+  <link rel="stylesheet" href="secondary-air.css">
 </head>
 <body>
   <div id="screen-fit">
@@ -19,7 +21,7 @@
         <button class="secondary-tab" data-tab="maintenance">MAINTENANCE</button>
         <button class="secondary-tab" data-tab="diagnostics">DIAGNOSTICS</button>
         <button class="secondary-tab settings-tab" data-tab="settings" aria-label="Settings" title="Settings">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8.92 4a1.65 1.65 0 0 0 1-1.51V2.4a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 15 4a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8.92 4a1.65 1.65 0 0 0 1-1.51V2.4a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 15 4a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15z"/></svg>
         </button>
       </nav>
 
@@ -111,9 +113,7 @@
                   <stop offset="1" stop-color="#020503" stop-opacity=".7"/>
                 </linearGradient>
               </defs>
-
               <rect x="0" y="0" width="620" height="330" fill="url(#wxShade)"/>
-
               <g class="wx-heading-scale">
                 <path d="M38 30H582"/>
                 <path d="M72 30v9M140 30v9M208 30v9M276 30v13M344 30v13M412 30v9M480 30v9M548 30v9"/>
@@ -122,7 +122,6 @@
                 <text x="480" y="22">36</text><text x="548" y="22">37</text>
                 <path class="wx-heading-bug" d="M310 17v23M301 17h18"/>
               </g>
-
               <g class="wx-sector-grid">
                 <path d="M310 312L42 62M310 312L578 62"/>
                 <path d="M310 312V42" class="wx-centerline"/>
@@ -131,40 +130,34 @@
                 <path d="M70 312A240 240 0 0 1 550 312"/>
                 <path d="M5 312A305 305 0 0 1 615 312"/>
               </g>
-
               <g class="wx-range-labels">
                 <text x="320" y="226">10</text>
                 <text x="320" y="151">20</text>
                 <text x="320" y="77">30</text>
                 <text x="584" y="68">40 NM</text>
               </g>
-
               <g class="weather-returns-sector wx-left">
                 <path class="wx-green" d="M28 76h32V62h40v10h36v19h30v18h35v24h-26v22h-42v-12H96v17H63v-24H38v-27H18z"/>
                 <path class="wx-yellow" d="M55 83h34V71h31v14h26v19h31v20h-22v18h-35v-14H88v12H58v-22H40V96h15z"/>
                 <path class="wx-red" d="M76 89h28V79h20v14h25v18h18v15h-28v11h-26v-13H88v8H67v-21H55V98h21z"/>
                 <path class="wx-magenta" d="M94 93h19v-8h13v12h17v17h-12v12h-17v-10H99v7H83v-17H76V98h18z"/>
               </g>
-
               <g class="weather-returns-sector wx-mid">
                 <path class="wx-green" d="M172 170h33v-20h38v12h34v25h28v24h-18v22h-40v-13h-35v18h-37v-20h-28v-24h25z"/>
                 <path class="wx-yellow" d="M191 177h29v-15h25v12h27v21h21v17h-20v17h-31v-12h-27v10h-26v-18h-20v-18h22z"/>
                 <path class="wx-red" d="M211 182h20v-11h18v13h19v17h15v11h-17v13h-21v-10h-19v8h-20v-15h-13v-14h18z"/>
               </g>
-
               <g class="weather-returns-sector wx-right">
                 <path class="wx-green" d="M360 91h38V72h42v13h37v19h33v22h37v31h34v40h-22v28h-43v-16h-36v22h-42v-18h-31v-26h-38v-29h-29v-30h20z"/>
                 <path class="wx-yellow" d="M390 101h29V85h35v13h31v18h29v20h31v28h25v27h-24v22h-34v-15h-30v20h-34v-18h-26v-22h-28v-25h-24v-26h20z"/>
                 <path class="wx-red" d="M421 111h25V98h24v15h23v17h27v22h21v22h-20v18h-28v-14h-23v15h-26v-17h-19v-20h-23v-21h-18v-20h17z"/>
                 <path class="wx-magenta" d="M451 119h17v-10h15v13h17v16h18v16h14v15h-16v13h-19v-12h-18v10h-20v-14h-14v-17h-13v-16h19z"/>
               </g>
-
               <g class="wx-ownship" transform="translate(310 294)">
                 <path d="M0 -28L5 -8L25 3L25 9L5 4L4 23L12 29L12 33L0 29L-12 33L-12 29L-4 23L-5 4L-25 9L-25 3L-5 -8Z"/>
                 <path d="M-34 0H34M0 -42V38" class="wx-ownship-cross"/>
               </g>
             </svg>
-
             <div class="weather-legend-greeble" aria-label="Weather radar legend">
               <div class="wx-mode"><span>WX</span><strong>MAN</strong><span>TILT</span><strong>+0.5°</strong><span>RNG</span><strong>40 NM</strong></div>
               <div class="wx-intensity"><span>PRECIP</span><i class="wx-swatch green"></i><i class="wx-swatch yellow"></i><i class="wx-swatch red"></i><i class="wx-swatch magenta"></i></div>
