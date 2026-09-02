@@ -1,273 +1,232 @@
-/* Experimental large-format secondary display.
-   This pass keeps the readability gains from the literal 2x experiment, but
-   treats the interface as field-evolved equipment: primary values get large,
-   supporting labels stay compact, and awkward local exceptions are allowed. */
+/* Large-format secondary display.
+   Base styles load first; this file is the final, intentional override layer. */
 
-/* Top navigation: intentionally oversized, but still one-line instrument tabs. */
+/* ---------- Structural frame ---------- */
+.secondary-display{
+  grid-template-rows:96px 1fr;
+}
+
+.secondary-tabs{
+  height:96px;
+  padding:12px 24px 0;
+  grid-template-columns:repeat(5,minmax(0,1fr)) 96px;
+  gap:12px;
+  border-bottom:4px solid var(--green);
+}
+
 .secondary-tab{
-  font-size:23px!important;
-  letter-spacing:.035em!important;
-  padding-left:20px!important;
-  padding-right:12px!important;
+  height:72px;
+  padding:0 18px 0 30px;
+  font-size:35px;
+  letter-spacing:.035em;
+  transform:translateY(0);
 }
-.secondary-tab[data-tab="maintenance"]{padding-left:50px!important}
+
+/* Four-pixel outer shape, preserving the clipped/chamfered tab construction. */
+.secondary-tab::after{
+  inset:4px;
+  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px);
+}
+
+/* Inactive tabs sit proud. Active tab drops into the 4px baseline. */
+.secondary-tab.active{transform:translateY(8px)}
+
+.secondary-tab[data-tab="maintenance"]{padding-left:74px}
 .secondary-tab[data-tab="maintenance"]::before{
-  width:22px!important;
-  min-width:22px!important;
-  height:20px!important;
-  font-size:14px!important;
+  left:24px;
+  width:30px;
+  min-width:30px;
+  height:27px;
+  border-width:2px;
+  font-size:19px;
 }
 
-/* Module titles should read from across the bench. */
+.settings-tab svg{
+  width:36px;
+  height:36px;
+}
+
+.secondary-module{border-width:2px}
+
 .module-heading{
-  font-size:24px!important;
-  letter-spacing:.045em!important;
+  font-size:24px;
+  letter-spacing:.045em;
 }
 
-/* Legacy radar text, retained for completeness during load. */
-.cardinals text{font-size:20px!important}
-.radar-contact text{font-size:17px!important}
-.radar-side-data span,
+/* ---------- Ground station status ---------- */
+.status-cards{
+  padding:12px 14px 7px;
+  column-gap:18px;
+}
+
+.status-card{
+  height:80px;
+  padding:9px 0 10px;
+}
+
 .status-card span,
 .status-summary span,
-.trend-heading span,
-.weather-alert span{font-size:17px!important}
-.radar-side-data strong{font-size:22px!important}
-.radar-legend{font-size:16px!important}
+.trend-heading span{
+  font-size:16px;
+  line-height:1;
+}
 
-/* Ground-station status. Labels remain subordinate to the numbers. */
-.status-card span,
-.status-summary span,
-.trend-heading span{font-size:16px!important;line-height:1!important}
-.status-card strong{font-size:25px!important;line-height:.95!important}
-.trend-heading strong{font-size:20px!important}
-.status-summary strong{font-size:20px!important}
-.status-card{padding-top:5px!important;padding-bottom:7px!important}
-.status-summary>div{gap:1px!important}
+.status-card strong{
+  font-size:25px;
+  line-height:.95;
+}
 
-/* Let the lower status block consume its space rather than spilling through it. */
-.status-lower{padding-top:5px!important}
-.trend-heading{height:22px!important}
+.status-lower{padding-top:5px}
+.trend-heading{height:22px}
+.trend-heading strong{font-size:20px}
+.status-summary>div{gap:1px}
+.status-summary strong{font-size:20px}
 
-/* Tactical airspace plot. Geometry labels are deliberately more restrained
-   than contact information, as if they survived from an earlier software rev. */
-.air-geo-label{font-size:16px!important}
-.air-zone-label{font-size:14px!important}
-.air-contact .air-readout{font-size:17px!important}
-.air-contact .air-readout.dim{font-size:15px!important}
+/* ---------- Tactical airspace plot ---------- */
+.air-geo-label{font-size:16px}
+.air-zone-label{font-size:14px}
+.air-contact .air-readout{font-size:17px}
+.air-contact .air-readout.dim{font-size:15px}
 
-/* Readability retrofit: later hardware revision widened the target-data rail
-   rather than shrinking its primary values back down. */
+/* Readability retrofit: widen the target-data rail rather than shrinking values. */
 .air-module .radar-module-body{
-  grid-template-columns:minmax(0,1fr) 244px!important;
-  gap:8px!important;
+  grid-template-columns:minmax(0,1fr) 244px;
+  gap:8px;
 }
 
-.air-module .radar-side-data{
-  padding:5px 7px 6px!important;
-}
+.air-module .radar-side-data{padding:5px 7px 6px}
 
 .air-module .radar-side-data>div:not(.air-alert){
-  grid-template-columns:38px 1fr!important;
-  gap:3px!important;
+  grid-template-columns:38px 1fr;
+  gap:3px;
 }
-.air-module .radar-side-data>div:nth-child(1){height:43px!important}
-.air-module .radar-side-data>div:nth-child(2){height:48px!important;margin-top:-2px!important}
-.air-module .radar-side-data>div:nth-child(3){height:44px!important;margin-top:8px!important}
-.air-module .radar-side-data>div:nth-child(4){height:44px!important;margin-top:-2px!important}
 
-/* Small boxed legends stay genuinely small. */
+.air-module .radar-side-data>div:nth-child(1){height:43px}
+.air-module .radar-side-data>div:nth-child(2){height:48px;margin-top:-2px}
+.air-module .radar-side-data>div:nth-child(3){height:44px;margin-top:8px}
+.air-module .radar-side-data>div:nth-child(4){height:44px;margin-top:-2px}
+
+/* Small legends deliberately remain a different typographic system. */
 .air-module .radar-side-data>div:not(.air-alert)>span::after{
-  min-width:30px!important;
-  min-height:18px!important;
-  font-size:10px!important;
-  line-height:.82!important;
+  min-width:30px;
+  min-height:18px;
+  font-size:10px;
+  line-height:.82;
 }
 
-/* Primary instrument values: large, angular, and intentionally inconsistent. */
-.air-module .radar-side-data>div:nth-child(1)>strong::after{font-size:41px!important}
-.air-module .radar-side-data>div:nth-child(2)>strong::after{font-size:47px!important}
-.air-module .radar-side-data>div:nth-child(3)>strong::after{font-size:39px!important}
-.air-module .radar-side-data>div:nth-child(4)>strong::after{font-size:43px!important}
+.air-module .radar-side-data>div:nth-child(1)>strong::after{font-size:41px}
+.air-module .radar-side-data>div:nth-child(2)>strong::after{font-size:47px}
+.air-module .radar-side-data>div:nth-child(3)>strong::after{font-size:39px}
+.air-module .radar-side-data>div:nth-child(4)>strong::after{font-size:43px}
 
-/* Later-added wind/drift annotations retain a different scale and rhythm. */
-.air-module .radar-side-data>div:nth-child(2)>strong{padding-right:31px!important}
+/* Later-added wind/drift annotations keep their own scale. */
+.air-module .radar-side-data>div:nth-child(2)>strong{padding-right:31px}
 .air-module .radar-side-data>div:nth-child(2)>strong::before{
-  right:0!important;
-  top:6px!important;
-  font-size:10px!important;
-  line-height:.85!important;
+  right:0;
+  top:6px;
+  font-size:10px;
+  line-height:.85;
 }
 .air-module .radar-side-data>div:nth-child(2)::before{
-  left:39px!important;
-  bottom:-8px!important;
-  font-size:9px!important;
+  left:39px;
+  bottom:-8px;
+  font-size:9px;
 }
 .air-module .radar-side-data>div:nth-child(2)::after{
-  right:30px!important;
-  bottom:-10px!important;
-  font-size:15px!important;
+  right:30px;
+  bottom:-10px;
+  font-size:15px;
 }
 
-/* Position strip was evidently added after the four core motion fields. */
 .air-module .radar-side-data::before{
-  height:43px!important;
-  flex-basis:43px!important;
-  margin-left:-7px!important;
-  margin-right:-7px!important;
-  padding:5px 7px 0!important;
-  font-size:11px!important;
+  height:43px;
+  flex-basis:43px;
+  margin-left:-7px;
+  margin-right:-7px;
+  padding:5px 7px 0;
+  font-size:11px;
 }
 .air-module .radar-side-data::after{
-  right:8px!important;
-  top:190px!important;
-  font-size:14px!important;
-  line-height:1.05!important;
+  right:8px;
+  top:190px;
+  font-size:14px;
+  line-height:1.05;
 }
 
-/* Rolling amber message list. Larger than the original, but still the dense
-   printer-tape layer rather than another primary readout. */
 .air-module .radar-side-data .air-alert{
-  left:9px!important;
-  right:9px!important;
-  top:236px!important;
-  bottom:6px!important;
-  padding-top:4px!important;
+  left:9px;
+  right:9px;
+  top:236px;
+  bottom:6px;
+  padding-top:4px;
 }
-.air-module .radar-side-data .air-alert>b{font-size:12px!important;line-height:.95!important}
-.air-message-entry{font-size:11.5px!important;line-height:1.08!important;margin-bottom:4px!important}
 
-/* Radar legend is readable but remains subordinate to the plot. */
-.air-module .radar-legend{font-size:15px!important;gap:18px!important}
+/* Header has an inline font declaration in the JS-generated markup. */
+.air-module .radar-side-data .air-alert>b{
+  font-size:12px!important;
+  line-height:.95!important;
+}
+.air-message-entry{
+  font-size:11.5px!important;
+  line-height:1.08!important;
+  margin-bottom:4px!important;
+}
 
-/* Primitive radar-edge cruft. Do not regularize these: each feels like a
-   separate firmware addition, but their boxes now actually contain the text. */
+.air-module .radar-legend{
+  font-size:15px;
+  gap:18px;
+}
+
+/* Primitive edge cruft stays intentionally irregular. */
 .air-module::before,
 .air-module::after,
 .air-module .radar-module-body::before,
 .air-module .radar-module-body::after{
-  font-size:12px!important;
-  line-height:.95!important;
+  font-size:12px;
+  line-height:.95;
 }
 .air-module::before{
-  width:84px!important;
-  height:38px!important;
-  padding:5px 6px 3px!important;
+  width:84px;
+  height:38px;
+  padding:5px 6px 3px;
 }
 .air-module::after{
-  left:109px!important;
-  width:78px!important;
-  height:38px!important;
-  padding:5px 6px 3px!important;
+  left:109px;
+  width:78px;
+  height:38px;
+  padding:5px 6px 3px;
 }
 .air-module .radar-module-body::before{
-  width:126px!important;
-  height:44px!important;
-  padding:5px 6px 3px!important;
+  width:126px;
+  height:44px;
+  padding:5px 6px 3px;
 }
 .air-module .radar-module-body::after{
-  top:91px!important;
-  width:100px!important;
-  height:42px!important;
-  padding:5px 6px 3px!important;
+  top:91px;
+  width:100px;
+  height:42px;
+  padding:5px 6px 3px;
 }
 
-/* Weather radar: navigation scale is prominent; mode/legend text is compact. */
-.wx-heading-scale text{font-size:19px!important}
-.wx-range-labels text{font-size:17px!important}
+/* ---------- Weather ---------- */
+.wx-heading-scale text{font-size:19px}
+.wx-range-labels text{font-size:17px}
+
 .weather-legend-greeble{
-  min-width:330px!important;
-  font-size:14px!important;
-  line-height:1!important;
-  padding:6px 8px!important;
+  min-width:330px;
+  padding:6px 8px;
+  font-size:14px;
+  line-height:1;
 }
 .wx-mode,
-.wx-intensity{min-height:18px!important}
-.wx-mode strong{font-size:14px!important}
-.wx-swatch{width:22px!important;height:9px!important}
+.wx-intensity{min-height:18px}
+.wx-mode strong{font-size:14px}
+.wx-swatch{width:22px;height:9px}
 
-/* Bottom weather advisory was one of the literal-2x overflow points. Give it
-   a little more physical height while keeping the alert icon emphatic. */
 .weather-alert{
-  height:62px!important;
-  grid-template-columns:46px 1fr 100px!important;
+  height:62px;
+  grid-template-columns:46px 1fr 100px;
 }
-.weather-alert span{font-size:15px!important;line-height:1!important}
-.weather-alert strong{font-size:16px!important;line-height:1!important}
+.weather-alert span{font-size:15px;line-height:1}
+.weather-alert strong{font-size:16px;line-height:1}
 .alert-icon{font-size:38px!important}
-
-/* Structural revision: the later large-format operator console gained a much
-   taller tab rail and heavier primary framing. Fine internal instrument lines
-   deliberately remain thinner so the hierarchy still reads at a glance. */
-.secondary-display{
-  grid-template-rows:96px 1fr!important;
-}
-
-.secondary-tabs{
-  height:96px!important;
-  padding:12px 24px 0!important;
-  grid-template-columns:repeat(5,minmax(0,1fr)) 96px!important;
-  gap:12px!important;
-  border-bottom-width:4px!important;
-  border-bottom-color:var(--green)!important;
-}
-
-/* SYSTEMS disappears in this hardware revision, giving the remaining operator
-   modes enough width to keep their large labels intact. */
-.secondary-tab[data-tab="systems"]{display:none!important}
-
-.secondary-tab{
-  height:72px!important;
-  padding-left:30px!important;
-  padding-right:18px!important;
-  font-size:35px!important;
-  transform:translateY(0)!important;
-}
-
-/* The tab outline is made from its green outer shape and dark inset. Doubling
-   the inset doubles the apparent stroke without changing the chamfer language. */
-.secondary-tab::after{
-  inset:4px!important;
-  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px)!important;
-}
-
-/* Inactive tabs sit slightly proud of the rail. The selected tab drops down
-   exactly far enough for its bottom edge to meet the 4px structural baseline. */
-.secondary-tab.active{transform:translateY(8px)!important}
-
-.secondary-tab[data-tab="maintenance"]{padding-left:74px!important}
-.secondary-tab[data-tab="maintenance"]::before{
-  left:24px!important;
-  width:30px!important;
-  min-width:30px!important;
-  height:27px!important;
-  border-width:2px!important;
-  font-size:19px!important;
-}
-
-.settings-tab svg{
-  width:36px!important;
-  height:36px!important;
-}
-
-/* Primary section outlines only. Internal dividers retain their original
-   lighter weight, giving the interface the layered-in-over-time character. */
-.secondary-module{
-  border-width:2px!important;
-}
-
-/* Status retrofit: later operators dropped two low-value always-on fields and
-   used the reclaimed space to make the remaining four primary cards easier to
-   read at a glance. The source markup stays intact for the original display. */
-.status-cards .status-card:nth-child(3),
-.status-cards .status-card:nth-child(6){display:none!important}
-.status-card{
-  height:80px!important;
-  padding-top:9px!important;
-  padding-bottom:10px!important;
-}
-.status-cards{
-  padding-top:12px!important;
-  padding-bottom:7px!important;
-  column-gap:18px!important;
-}
