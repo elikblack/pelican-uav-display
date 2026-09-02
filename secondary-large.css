@@ -195,3 +195,56 @@
 .weather-alert span{font-size:15px!important;line-height:1!important}
 .weather-alert strong{font-size:16px!important;line-height:1!important}
 .alert-icon{font-size:38px!important}
+
+/* Structural revision: the later large-format operator console gained a much
+   taller tab rail and heavier primary framing. Fine internal instrument lines
+   deliberately remain thinner so the hierarchy still reads at a glance. */
+.secondary-display{
+  grid-template-rows:96px 1fr!important;
+}
+
+.secondary-tabs{
+  height:96px!important;
+  padding:12px 24px 0!important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) 96px!important;
+  gap:12px!important;
+  border-bottom-width:2px!important;
+}
+
+.secondary-tab{
+  height:72px!important;
+  padding-left:30px!important;
+  padding-right:18px!important;
+  font-size:35px!important;
+  transform:translateY(4px)!important;
+}
+
+/* The tab outline is made from its green outer shape and dark inset. Doubling
+   the inset doubles the apparent stroke without changing the chamfer language. */
+.secondary-tab::after{
+  inset:4px!important;
+  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px)!important;
+}
+
+.secondary-tab.active{transform:translateY(0)!important}
+
+.secondary-tab[data-tab="maintenance"]{padding-left:74px!important}
+.secondary-tab[data-tab="maintenance"]::before{
+  left:24px!important;
+  width:30px!important;
+  min-width:30px!important;
+  height:27px!important;
+  border-width:2px!important;
+  font-size:19px!important;
+}
+
+.settings-tab svg{
+  width:36px!important;
+  height:36px!important;
+}
+
+/* Primary section outlines only. Internal dividers retain their original
+   lighter weight, giving the interface the layered-in-over-time character. */
+.secondary-module{
+  border-width:2px!important;
+}
